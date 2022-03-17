@@ -1,6 +1,0 @@
-
-Build instructions Linux/Mac/Windows:
-
-	docker build -t monoximage .
-	docker run -p8080:80 --rm --name=monox monoximage
-	docker exec -it monox bash &
