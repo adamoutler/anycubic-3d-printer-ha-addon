@@ -11,7 +11,8 @@ RUN  apk add --no-cache apache2=2.4.53-r0 php8=8.0.16-r0=8.0.16-r0 git=2.35.1-r0
      ln -sf /proc/self/fd/1 /var/log/apache2/access.log && \
      ln -sf /proc/self/fd/1 /var/log/apache2/error.log;
 COPY run.sh /
-RUN  git clone https://github.com/adamoutler/anycubic-3d-printer-ha-addon && \
+RUN  cd ${WORKDIR} && \
+     git clone https://github.com/adamoutler/anycubic-3d-printer-ha-addon && \
      cd anycubic-3d-printer-ha-addon && \
      cp -R ./src/* /var/www/localhost/htdocs/ && \
      chown -R root:root /var/www/localhost/htdocs && \
