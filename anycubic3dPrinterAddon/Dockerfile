@@ -11,12 +11,12 @@ RUN  apk add apache2 php8 php8-apache2 git && \
      ln -sf /proc/self/fd/1 /var/log/apache2/access.log && \
      ln -sf /proc/self/fd/1 /var/log/apache2/error.log;
 COPY run.sh /
-RUN  git clone https://github.com/adamoutler/anycubic-3d-printer-ha-addon
-     cd anycubic-3d-printer-ha-addon
-     cp -R ./src/* /var/www/localhost/htdocs/
+RUN  git clone https://github.com/adamoutler/anycubic-3d-printer-ha-addon && \
+     cd anycubic-3d-printer-ha-addon && \
+     cp -R ./src/* /var/www/localhost/htdocs/ && \
      chown -R root:root /var/www/localhost/htdocs && \
      chmod -R 755 /var/www/localhost/htdocs && \
-     cd anycubic-3d-printer-ha-addon
+     cd anycubic-3d-printer-ha-addon && \
      chmod a+x /run.sh
 
 EXPOSE 80
