@@ -1,10 +1,5 @@
 <?php
 
-/*----------------------------------------------------------------------------------------
- * Copyright (c) Microsoft Corporation. All rights reserved.
- * Licensed under the MIT License. See LICENSE in the project root for license information.
- *---------------------------------------------------------------------------------------*/
-
 parse_str($_SERVER['QUERY_STRING'], $_GET);
 /* debug*/
 if (! isset($_GET["server"])){$_GET["server"]="192.168.1.254";}
@@ -20,7 +15,7 @@ stream_set_blocking(STDIN, 0);
 
 fwrite($socket, trim($_GET["cmd"] . "\n"));
 
-sleep(0.1);
+sleep(1);
 $read   = array($socket, STDIN);
 if (!is_resource($socket)) return;
 $write  = NULL;

@@ -8,12 +8,12 @@
 			// Update VARIANT to pick a PHP version: 8, 8.0, 7, 7.4, 7.3
 			// Append -bullseye or -buster to pin to an OS version.
 			// Use -bullseye variants on local on arm64/Apple Silicon.
-			"VARIANT": "7-bullseye",
+			"VARIANT": "8",
 			"NODE_VERSION": "lts/*"
 		}
 	},
 	"postStartCommand":" ln -s /workspaces/anycubic-3d-printer-ha-addon/src/* /var/www/html;service apache2 start;",
-	
+
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
 		"php.validate.executablePath": "/usr/local/bin/php"

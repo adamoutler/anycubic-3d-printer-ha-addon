@@ -1,5 +1,4 @@
-ip = "192.168.1.254"
-port = "6000"
+
 
 selectedFile = "";
 selectedFileName = "";
@@ -213,44 +212,32 @@ function manageStates(item) {
     }
 }
 
-function getStatus() {
-    doApiCall('getstatus',
-        function(err, data) {
-            mergeState(data)
-            if (err !== null) {
-                alert('Something went wrong: ' + err);
-            } else {
-                for (var item in data) {
-                    if (item == "end") {
-                        continue;
-                    }
-                    if (item == "status")
-                        manageStates(data[item])
-                    ele = document.getElementById(item)
-                    if (ele != null) ele.innerHTML = data[item];
-                }
+var callback=function handleResults(err, data) {
+    mergeState(data)
+    if (err !== null) {
+        alert('Something went wrong: ' + err);
+    } else {
+        for (var item in data) {
+            if (item == "end") {
+                continue;
             }
-        });
+            if (item == "status") {
+                manageStates(data[item])
+                ele = document.getElementById(item)
+                if (ele != null) ele.innerHTML = data[item];
+            }
+        }
+    }
 }
 
+
+function getStatus(){
+    doApiCall('getstatus',callback);
+}
+
+
 function getSysInfo() {
-    doApiCall('sysinfo',
-        function(err, data) {
-            mergeState(data)
-            if (err !== null) {
-                alert('Something went wrong: ' + err);
-            } else {
-                for (var item in data) {
-                    if (item == "end") {
-                        continue;
-                    }
-                    if (item == "status")
-                        manageStates(data[item])
-                    ele = document.getElementById(item)
-                    if (ele != null) ele.innerHTML = data[item];
-                }
-            }
-        });
+    doApiCall('sysinfo', callback);
 }
 
 // Make the DIV element draggable:
@@ -271,11 +258,12 @@ function doTenSecondRefresh() {
     setTimeout(doTenSecondRefresh, 15000);
 }
 
+
 function doSixtySeocondRefresh() {
     // do whatever you like here
     console.log("files");
     refreshFiles()
-    setTimeout(doFifteenSecondRefresh, 60000);
+    setTimeout(doSixtySeocondRefresh, 60000);
 }
 
 function sleep(ms) {
