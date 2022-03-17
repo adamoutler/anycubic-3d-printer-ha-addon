@@ -4,16 +4,16 @@ FROM $BUILD_FROM
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ENV LANG C.UTF-8
 WORKDIR /data
-RUN apk add --no-cache apache2=2.4.53-r0 php8=8.0.16-r0=8.0.16-r0 git=2.35.1-r0 &&
-     rm -Rf /var/www/localhost/htdocs/* &&
-     ln -sf /proc/self/fd/1 /var/log/apache2/access.log &&
-     ln -sf /proc/self/fd/1 /var/log/apache2/error.log
+RUN apk add --no-cache apache2=2.4.53-r0 php8=8.0.16-r0=8.0.16-r0 git=2.35.1-r0 && \
+     rm -Rf /var/www/localhost/htdocs/* && \
+     ln -sf /proc/self/fd/1 /var/log/apache2/access.log && \
+     ln -sf /proc/self/fd/1 /var/log/apache2/error.log;
 COPY run.sh /
 RUN git clone https://github.com/adamoutler/anycubic-3d-printer-ha-addon
 WORKDIR anycubic-3d-printer-ha-addon
-RUN cp -R ./src/* /var/www/localhost/htdocs/ &&
-     chown -R root:root /var/www/localhost/htdocs &&
-     chmod -R 755 /var/www/localhost/htdocs &&
+RUN cp -R ./src/* /var/www/localhost/htdocs/ && \
+     chown -R root:root /var/www/localhost/htdocs && \
+     chmod -R 755 /var/www/localhost/htdocs && \
      chmod a+x /run.sh
 EXPOSE 80
 CMD [ "/run.sh" ]
