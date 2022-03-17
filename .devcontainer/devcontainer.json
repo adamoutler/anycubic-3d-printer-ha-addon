@@ -12,6 +12,7 @@
 			"NODE_VERSION": "lts/*"
 		}
 	},
+	"postStartCommand":"chmod 777 /var/www/html/ /var/www/;  ln -s /workspaces/anycubic-3d-printer-ha-addon/* /var/www/html;service apache2 start;",
 	
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
@@ -32,6 +33,14 @@
 	"portsAttributes": {
 		"8000": {
 			"label": "Hello Remote World",
+			"onAutoForward": "notify"
+		},
+		"8080": {
+			"label": "Apache2-1",
+			"onAutoForward": "notify"
+		},
+		"80": {
+			"label": "Apache2-2",
 			"onAutoForward": "notify"
 		}
 	},

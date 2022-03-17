@@ -21,6 +21,7 @@
             "request": "launch",
             "program": "${file}",
             "cwd": "${fileDirname}",
+            "env":{"QUERY_STRING":"server=192.168.1.254&port=6000&cmd=getstatus"},
             "port": 9000
         }
     ]
