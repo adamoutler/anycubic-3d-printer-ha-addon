@@ -5,7 +5,6 @@
   "slug": "anycubic_3d_printer",
   "description": "Controls and Monitoring for MonoX 3D Printers.",
   "arch": ["armhf", "armv7", "aarch64"],
-  "auth_api": false,
   "homeassistant_api": true,
   "hassio_role": "homeassistant",
   "hassio_api": true,
