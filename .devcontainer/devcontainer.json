@@ -24,7 +24,8 @@
 		"felixfbecker.php-debug",
 		"bmewburn.vscode-intelephense-client",
 		"mrmlnc.vscode-apache",
-		"xdebug.php-debug"
+		"xdebug.php-debug",
+		"yzhang.markdown-all-in-one"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
