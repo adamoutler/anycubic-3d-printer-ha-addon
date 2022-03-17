@@ -223,9 +223,9 @@ var callback=function handleResults(err, data) {
             }
             if (item == "status") {
                 manageStates(data[item])
-                ele = document.getElementById(item)
-                if (ele != null) ele.innerHTML = data[item];
             }
+            ele = document.getElementById(item)
+            if (ele != null) ele.innerHTML = data[item];
         }
     }
 }
@@ -271,18 +271,17 @@ function sleep(ms) {
 }
 
 function doSlowInitial() {
-    getStatus();
-    sleep(500);
-
-    getSysInfo();
-    sleep(500);
-    getSysInfo();
-    sleep(500);
     refreshFiles()
-    sleep(500);
+    sleep(1000);
+    getSysInfo();
+    
+    sleep(1000);
     getStatus()
+    sleep(1000);
+    getSysInfo();
+    executeAsync(doTenSecondRefresh());
+    executeAsync(doSixtySeocondRefresh());
 
 
 }
-executeAsync(doTenSecondRefresh());
-executeAsync(doSixtySeocondRefresh());
+doSlowInitial()

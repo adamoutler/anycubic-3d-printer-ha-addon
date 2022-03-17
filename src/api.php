@@ -15,11 +15,11 @@ stream_set_blocking(STDIN, 0);
 
 fwrite($socket, trim($_GET["cmd"] . "\n"));
 
-sleep(1);
 $read   = array($socket, STDIN);
 if (!is_resource($socket)) return;
 $write  = NULL;
 $except = NULL;
+sleep(1);
 @stream_select($read, $write, $except, null);
 
 $data="";
