@@ -12,7 +12,7 @@
 			"NODE_VERSION": "lts/*"
 		}
 	},
-	"postStartCommand":"chmod 777 /var/www/html/ /var/www/;  ln -s /workspaces/anycubic-3d-printer-ha-addon/* /var/www/html;service apache2 start;",
+	"postStartCommand":" ln -s /workspaces/anycubic-3d-printer-ha-addon/src/* /var/www/html;service apache2 start;",
 	
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
@@ -23,7 +23,8 @@
 	"extensions": [
 		"felixfbecker.php-debug",
 		"bmewburn.vscode-intelephense-client",
-		"mrmlnc.vscode-apache"
+		"mrmlnc.vscode-apache",
+		"xdebug.php-debug"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
