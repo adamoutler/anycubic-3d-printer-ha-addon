@@ -1,28 +1,27 @@
 {
-    "name": "Anycubic 3D Printer",
-    "image": "adamoutler/{arch}-hassosargonone",
-    "version": "0.0.1",
-    "slug": "anycubic_3d_printer",
-    "description": "Controls and Monitoring for MonoX 3D Printers.",
-    "arch": ["armhf", "armv7", "aarch64"],
-    "auth_api": false,
-    "homeassistant_api": true,
-    "hassio_role": "homeassistant",
-    "hassio_api": true,
-    "devices": [],
-    "url": "https://community.home-assistant.io/t/argon-one-active-cooling-addon/262598/",
-    "map": ["config","addons","share", "media"],
-    "options": {
-      "Mono X IP Addresses": "192.168.1.254",
-      "Mono X Ports": "6000",
-      "Use a Camera": false,
-      "Camera URLs": "http://192.168.1.251:8080/?action=stream&1647305721063"
-     },
-    "schema": {
-      "Mono X IP Addresses": "str",
-      "Mono X Ports":"str",
-      "Use a Camera": "bool",
-      "Camera URLs": "str"
-    }
+  "name": "Anycubic 3D Printer",
+  "image": "adamoutler/{arch}-hassosargonone",
+  "version": "0.0.1",
+  "slug": "anycubic_3d_printer",
+  "description": "Controls and Monitoring for MonoX 3D Printers.",
+  "arch": ["armhf", "armv7", "aarch64"],
+  "auth_api": false,
+  "homeassistant_api": true,
+  "hassio_role": "homeassistant",
+  "hassio_api": true,
+  "devices": [],
+  "url": "https://community.home-assistant.io/t/argon-one-active-cooling-addon/262598/",
+  "map": ["config", "addons", "share", "media"],
+  "options": {
+    "Mono X IP Addresses": "192.168.1.254",
+    "Mono X Ports": "6000",
+    "Use a Camera": false,
+    "Camera URLs": "http://192.168.1.251:8080/?action=stream&1647305721063"
+  },
+  "schema": {
+    "Mono X IP Addresses": "str",
+    "Mono X Ports": "str",
+    "Use a Camera": "bool",
+    "Camera URLs": "str"
   }
- 
+}

@@ -1,243 +1,233 @@
-
-
 selectedFile = "";
 selectedFileName = "";
 
-state = {}
+state = {};
 
 function print() {
-    document.getElementById("print").classList.add("disabled")
-    if (selectedFile != "") {
-        doApiCall('goprint,' + selectedFile + ',end', function(err, data) {
-            //do stuff here.
-        })
-    }
-
+  document.getElementById("print").classList.add("disabled");
+  if (selectedFile != "") {
+    doApiCall("goprint," + selectedFile + ",end", function (err, data) {
+      //do stuff here.
+    });
+  }
 }
 
 function pause() {
-    document.getElementById("pause").classList.add("disabled")
-    doApiCall('gopause,' + selectedFile + ',end', function(err, data) {
-        //do stuff here.
-    })
+  document.getElementById("pause").classList.add("disabled");
+  doApiCall("gopause," + selectedFile + ",end", function (err, data) {
+    //do stuff here.
+  });
 }
 
 function stop() {
-    document.getElementById("stop").classList.add("disabled")
-    doApiCall('gostop,' + selectedFile + ',end', function(err, data) {
-        //do stuff here.
-    })
+  document.getElementById("stop").classList.add("disabled");
+  doApiCall("gostop," + selectedFile + ",end", function (err, data) {
+    //do stuff here.
+  });
 }
 
 function onSelect(item) {
-    selectedFileName = item.selectedOptions[0].innerHTML;
-    selectedFile = item.value;
-    document.getElementById("selected").innerHTML = this.selectedFileName
+  selectedFileName = item.selectedOptions[0].innerHTML;
+  selectedFile = item.value;
+  document.getElementById("selected").innerHTML = this.selectedFileName;
 }
 
-
-
-
-
 function action(ele) {
-    var id = ele.id;
-    switch (id) {
-        case "print":
-            console.log('print');
-            print();
-            break;
-        case "pause":
-            console.log('pause');
-            pause();
-            break;
-        case "stop":
-            console.log("stop");
-            stop();
-            break;
-        case "printlist":
-            console.log("printlist");
-            break;
-    }
-
+  var id = ele.id;
+  switch (id) {
+    case "print":
+      console.log("print");
+      print();
+      break;
+    case "pause":
+      console.log("pause");
+      pause();
+      break;
+    case "stop":
+      console.log("stop");
+      stop();
+      break;
+    case "printlist":
+      console.log("printlist");
+      break;
+  }
 }
 
 function dragElement(elmnt) {
-    var pos1 = 0,
-        pos2 = 0,
-        pos3 = 0,
-        pos4 = 0;
-    if (document.getElementById(elmnt.id + "header")) {
-        // if present, the header is where you move the DIV from:
-        document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
-    } else {
-        // otherwise, move the DIV from anywhere inside the DIV:
-        elmnt.onmousedown = dragMouseDown;
-    }
+  var pos1 = 0,
+    pos2 = 0,
+    pos3 = 0,
+    pos4 = 0;
+  if (document.getElementById(elmnt.id + "header")) {
+    // if present, the header is where you move the DIV from:
+    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+  } else {
+    // otherwise, move the DIV from anywhere inside the DIV:
+    elmnt.onmousedown = dragMouseDown;
+  }
 
-    function dragMouseDown(e) {
-        e = e || window.event;
-        e.preventDefault();
-        // get the mouse cursor position at startup:
-        pos3 = e.clientX;
-        pos4 = e.clientY;
-        document.onmouseup = closeDragElement;
-        // call a function whenever the cursor moves:
-        document.onmousemove = elementDrag;
-    }
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // get the mouse cursor position at startup:
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    // call a function whenever the cursor moves:
+    document.onmousemove = elementDrag;
+  }
 
-    function elementDrag(e) {
-        console.log(e)
-        e = e || window.event;
-        e.preventDefault();
-        // calculate the new cursor position:
-        pos1 = pos3 - e.clientX;
-        pos2 = pos4 - e.clientY;
-        pos3 = e.clientX;
-        pos4 = e.clientY;
-        // set the element's new position:
+  function elementDrag(e) {
+    console.log(e);
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // set the element's new position:
 
+    elmnt.parentElement.style.top = elmnt.parentElement.offsetTop - pos2 + "px";
+    elmnt.parentElement.style.left =
+      elmnt.parentElement.offsetLeft - pos1 + "px";
+    elmnt.parentElement.classList.remove("right");
+    elmnt.parentElement.classList.remove("bottom");
+  }
 
-        elmnt.parentElement.style.top = (elmnt.parentElement.offsetTop - pos2) + "px";
-        elmnt.parentElement.style.left = (elmnt.parentElement.offsetLeft - pos1) + "px";
-        elmnt.parentElement.classList.remove("right")
-        elmnt.parentElement.classList.remove("bottom")
-
-    }
-
-    function closeDragElement() {
-        // stop moving when mouse button is released:
-        document.onmouseup = null;
-        document.onmousemove = null;
-    }
+  function closeDragElement() {
+    // stop moving when mouse button is released:
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
 }
-
 
 function mergeState(newstates) {
-    const result = {};
-    let key;
+  const result = {};
+  let key;
 
-    for (key in state) {
-        if (state.hasOwnProperty(key)) {
-            result[key] = state[key];
-        }
+  for (key in state) {
+    if (state.hasOwnProperty(key)) {
+      result[key] = state[key];
     }
+  }
 
-    for (key in newstates) {
-        if (newstates.hasOwnProperty(key)) {
-            result[key] = newstates[newstates];
-        }
+  for (key in newstates) {
+    if (newstates.hasOwnProperty(key)) {
+      result[key] = newstates[newstates];
     }
+  }
 }
 
-
-var doApiCall = function(command, callback) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'api.php?server=' + ip + '&port=' + port + '&cmd=' + command, true);
-    xhr.responseType = 'json';
-    xhr.onload = function() {
-        var status = xhr.status;
-        if (status === 200) {
-            callback(null, xhr.response);
-        } else {
-            callback(status, xhr.response);
-        }
-    };
-    xhr.send();
+var doApiCall = function (command, callback) {
+  var xhr = new XMLHttpRequest();
+  xhr.open(
+    "GET",
+    "api.php?server=" + ip + "&port=" + port + "&cmd=" + command,
+    true
+  );
+  xhr.responseType = "json";
+  xhr.onload = function () {
+    var status = xhr.status;
+    if (status === 200) {
+      callback(null, xhr.response);
+    } else {
+      callback(status, xhr.response);
+    }
+  };
+  xhr.send();
 };
 
 function refreshFiles() {
-    list = document.getElementById("printlist");
-    doApiCall('getfile',
-        function(err, data) {
-            mergeState(data)
-            if (err !== null) {
-                alert('Something went wrong: ' + err);
-            } else {
-                for (var item in data.files) {
-                    if (item == "end") {
-                        continue;
-                    }
-                    var opt = document.createElement('option');
-                    opt.value = data.files[item][1];
-                    opt.innerHTML = data.files[item][0];
-                    list.appendChild(opt);
-                }
-            }
-        });
+  list = document.getElementById("printlist");
+  doApiCall("getfile", function (err, data) {
+    mergeState(data);
+    if (err !== null) {
+      alert("Something went wrong: " + err);
+    } else {
+      for (var item in data.files) {
+        if (item == "end") {
+          continue;
+        }
+        var opt = document.createElement("option");
+        opt.value = data.files[item][1];
+        opt.innerHTML = data.files[item][0];
+        list.appendChild(opt);
+      }
+    }
+  });
 }
 
 function enablePrint(value) {
-    enableButton("print", value)
+  enableButton("print", value);
 }
 
 function enablePause(value) {
-    enableButton("pause", value)
+  enableButton("pause", value);
 }
 
 function enableStop(value) {
-    enableButton("stop", value)
+  enableButton("stop", value);
 }
 
 function enableButton(buttonName, value) {
-    ele = document.getElementById(buttonName);
-    if (value) {
-        ele.classList.remove("disabled");
-    } else {
-        ele.classList.add("disabled");
-    }
+  ele = document.getElementById(buttonName);
+  if (value) {
+    ele.classList.remove("disabled");
+  } else {
+    ele.classList.add("disabled");
+  }
 }
 
 function manageStates(item) {
-    switch (item) {
-        case ("print"):
-            enablePrint(true)
-            enablePause(true)
-            enableStop(true)
-            break;
-        case ("stop"):
-            enablePrint(true)
-            enablePause(false)
-            enableStop(false)
-            break;
-        case ("pause"):
-            enablePrint(true)
-            enablePause(false)
-            enableStop(true)
-            break;
-        case ("finished"):
-            enablePrint(false)
-            enablePause(false)
-            enableStop(false)
-            break;
+  switch (item) {
+    case "print":
+      enablePrint(true);
+      enablePause(true);
+      enableStop(true);
+      break;
+    case "stop":
+      enablePrint(true);
+      enablePause(false);
+      enableStop(false);
+      break;
+    case "pause":
+      enablePrint(true);
+      enablePause(false);
+      enableStop(true);
+      break;
+    case "finished":
+      enablePrint(false);
+      enablePause(false);
+      enableStop(false);
+      break;
+  }
+}
+
+var callback = function handleResults(err, data) {
+  mergeState(data);
+  if (err !== null) {
+    alert("Something went wrong: " + err);
+  } else {
+    for (var item in data) {
+      if (item == "end") {
+        continue;
+      }
+      if (item == "status") {
+        manageStates(data[item]);
+      }
+      ele = document.getElementById(item);
+      if (ele != null) ele.innerHTML = data[item];
     }
+  }
+};
+
+function getStatus() {
+  doApiCall("getstatus", callback);
 }
-
-var callback=function handleResults(err, data) {
-    mergeState(data)
-    if (err !== null) {
-        alert('Something went wrong: ' + err);
-    } else {
-        for (var item in data) {
-            if (item == "end") {
-                continue;
-            }
-            if (item == "status") {
-                manageStates(data[item])
-            }
-            ele = document.getElementById(item)
-            if (ele != null) ele.innerHTML = data[item];
-        }
-    }
-}
-
-
-function getStatus(){
-    doApiCall('getstatus',callback);
-}
-
 
 function getSysInfo() {
-    doApiCall('sysinfo', callback);
+  doApiCall("sysinfo", callback);
 }
 
 // Make the DIV element draggable:
@@ -245,43 +235,39 @@ dragElement(document.getElementById("box1"));
 dragElement(document.getElementById("box2"));
 dragElement(document.getElementById("box3"));
 
-
 function executeAsync(func) {
-    setTimeout(func, 0);
+  setTimeout(func, 0);
 }
 
 function doTenSecondRefresh() {
-    console.log("status");
-    getSysInfo()
-    sleep(500)
-    getStatus();
-    setTimeout(doTenSecondRefresh, 15000);
+  console.log("status");
+  getSysInfo();
+  sleep(500);
+  getStatus();
+  setTimeout(doTenSecondRefresh, 15000);
 }
 
-
 function doSixtySeocondRefresh() {
-    // do whatever you like here
-    console.log("files");
-    refreshFiles()
-    setTimeout(doSixtySeocondRefresh, 60000);
+  // do whatever you like here
+  console.log("files");
+  refreshFiles();
+  setTimeout(doSixtySeocondRefresh, 60000);
 }
 
 function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 function doSlowInitial() {
-    refreshFiles()
-    sleep(1000);
-    getSysInfo();
-    
-    sleep(1000);
-    getStatus()
-    sleep(1000);
-    getSysInfo();
-    executeAsync(doTenSecondRefresh());
-    executeAsync(doSixtySeocondRefresh());
+  refreshFiles();
+  sleep(1000);
+  getSysInfo();
 
-
+  sleep(1000);
+  getStatus();
+  sleep(1000);
+  getSysInfo();
+  executeAsync(doTenSecondRefresh());
+  executeAsync(doSixtySeocondRefresh());
 }
-doSlowInitial()
+doSlowInitial();
