@@ -4,7 +4,8 @@ FROM $BUILD_FROM
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ENV LANG C.UTF-8
 WORKDIR /data
-# hadolint ignore=DL3018 
+
+# hadolint ignore=DL3003,DL3018
 RUN apk add --no-cache apache2 php git && \
      httpd && \
      sleep 10 && \
