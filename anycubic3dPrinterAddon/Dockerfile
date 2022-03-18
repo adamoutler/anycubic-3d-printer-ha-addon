@@ -4,7 +4,7 @@ FROM $BUILD_FROM
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ENV LANG C.UTF-8
 WORKDIR /data
-RUN apk add --no-cache apache2=2.4.53-r0 php8=8.0.16-r0 git && \
+RUN apk add --no-cache apache2=2.4.53-r0 php8=8.0.16-r0 git=2.35.1-r0 && \
      httpd && \
      sleep 10 && \
      killall httpd && \
