@@ -58,6 +58,7 @@ jobs:
         uses: brpaz/hadolint-action@v1.4.0
         with:
           dockerfile: "./${{ needs.information.outputs.target }}/Dockerfile"
+          ignore: DL3018
 
   lint-json:
     name: JSON Lint
