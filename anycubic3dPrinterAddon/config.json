@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "slug": "anycubic_3d_printer",
   "description": "Controls and Monitoring for MonoX 3D Printers.",
-  "arch": ["armhf", "armv7", "aarch64", "i386","amd64"],
+  "arch": ["armhf", "armv7", "aarch64", "i386", "amd64"],
   "homeassistant_api": true,
   "hassio_role": "homeassistant",
   "hassio_api": true,
