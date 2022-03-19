@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/with-contenv bashio
+
 ###
 #Inputs - inputs from Home Assistant Config
 ###
