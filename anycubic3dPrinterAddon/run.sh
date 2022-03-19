@@ -1,3 +1,4 @@
+#!/bin/bash
 ###
 #Inputs - inputs from Home Assistant Config
 ###
