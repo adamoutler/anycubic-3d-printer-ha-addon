@@ -9,7 +9,7 @@
   "hassio_role": "homeassistant",
   "hassio_api": true,
   "devices": [],
-  "url": "https://community.home-assistant.io/t/argon-one-active-cooling-addon/262598/",
+  "url": "https://github.com/adamoutler/anycubic-3d-printer-ha-addon",
   "map": ["config", "addons", "share", "media"],
   "options": {
     "Mono X IP Addresses": "192.168.1.254",
