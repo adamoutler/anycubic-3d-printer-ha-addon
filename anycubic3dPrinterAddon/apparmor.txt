@@ -2,9 +2,6 @@
 
 profile anycubic_mono_x flags=(attach_disconnected,mediate_deleted) {
         #include <abstractions/base>
-        #include <abstractions/apache2-common>
-        #include <abstractions/base>
-        #include <abstractions/nameservice>
         #include <abstractions/php>
 
         capability setuid,
