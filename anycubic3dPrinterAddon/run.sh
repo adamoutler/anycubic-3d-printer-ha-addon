@@ -1,12 +1,12 @@
-#!/usr/bin/with-contenv bashio
-
+#!/bin/bash
 ###
 #Inputs - inputs from Home Assistant Config
 ###
-ips=$(bashio::config 'Mono X IP Addresses')
-ports=$(bashio::config 'Mono X Ports')
-useCam=$(bashio::config 'Use a Camera')
-cameras=$(bashio::config 'Camera URLs')
+cat options.json
+ips=$(jq -r '."Mono X IP Addresses"' </data/options.json)
+ports=$(jq -r '."Mono X Ports"' </data/options.json)
+useCam=$(jq -r '."Use a Camera"' </data/options.json)
+cameras=$(jq -r '."Camera URLs"' </data/options.json)
 
 ###
 #Config - adjust server config at startup configuration
