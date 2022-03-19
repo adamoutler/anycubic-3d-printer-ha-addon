@@ -9,7 +9,7 @@
   "hassio_role": "homeassistant",
   "hassio_api": true,
   "ingress": true,
-  "ingress_port":80,
+  "ingress_port": 80,
   "devices": [],
   "url": "https://github.com/adamoutler/anycubic-3d-printer-ha-addon",
   "map": ["config", "addons", "share", "media"],
