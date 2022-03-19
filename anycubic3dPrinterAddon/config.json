@@ -7,6 +7,7 @@
   "arch": ["armhf", "armv7", "aarch64", "i386", "amd64"],
   "homeassistant_api": true,
   "hassio_role": "homeassistant",
+  "apparmor": false,
   "hassio_api": true,
   "ingress": true,
   "ingress_port": 80,
