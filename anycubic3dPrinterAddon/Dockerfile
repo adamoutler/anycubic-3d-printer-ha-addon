@@ -6,7 +6,7 @@ ENV LANG C.UTF-8
 WORKDIR /data
 
 # hadolint ignore=DL3003,DL3018
-RUN apk add --no-cache apache2 php git && \
+RUN apk add --no-cache php8-apache2 git && \
      httpd && \
      sleep 10 && \
      killall httpd && \
