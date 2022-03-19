@@ -1,7 +1,7 @@
 ###
 #Inputs - inputs from Home Assistant Config
 ###
-
+cat options.json
 ips=$(jq -r '."Mono X IP Addresses"' <options.json)
 ports=$(jq -r '."Mono X Ports"' <options.json)
 useCam=$(jq -r '."Use a Camera"' <options.json)
