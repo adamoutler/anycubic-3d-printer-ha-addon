@@ -25,4 +25,5 @@ chmod 755 ${configFile}
 ###
 #Start - adjust configuration
 ###
+
 while true; do sleep 600; done;
