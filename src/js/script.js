@@ -155,11 +155,10 @@ var callback = function handleResults(err, data) {
       if (item == "end") {
         continue;
       }
-      if (item == "status"||"sysinfo") {
-        
+      if (item == "status" || "sysinfo") {
         this.updateItem = data[item];
         for (key in updateItem) {
-          if (key == "status")manageStates(data[item]);
+          if (key == "status") manageStates(data[item]);
           ele = document.getElementById(key);
           if (ele != null) ele.innerHTML = updateItem[key];
         }
@@ -204,7 +203,7 @@ function doSlowInitial() {
   sleep(3000);
   getStatus();
   sleep(3000);
-  
+
   executeAsync(doTenSecondRefresh());
 }
 doSlowInitial();
