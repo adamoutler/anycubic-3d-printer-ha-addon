@@ -206,7 +206,7 @@ async function doTenSecondRefresh() {
   getSysInfo();
   await sleep(1000);
 
-  executeAsync("doTenSecondRefresh(), 15000");
+  executeAsync(doTenSecondRefresh());
 }
 
 
