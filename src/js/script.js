@@ -54,19 +54,8 @@ function action(ele) {
 }
 
 function mergeState(newstates) {
-  const result = {};
-  let key;
-
-  for (key in state) {
-    if (state.hasOwnProperty(key)) {
-      result[key] = state[key];
-    }
-  }
-
   for (key in newstates) {
-    if (newstates.hasOwnProperty(key)) {
-      result[key] = newstates[newstates];
-    }
+    state[key] = newstates[key];
   }
 }
 
@@ -91,22 +80,7 @@ var doApiCall = function (command, callback) {
 
 function refreshFiles() {
   list = document.getElementById("printlist");
-  doApiCall("getfile", function (err, data) {
-    mergeState(data);
-    if (err !== null) {
-      alert("Something went wrong: " + err);
-    } else {
-      for (var item in data.files) {
-        if (item == "end") {
-          continue;
-        }
-        var opt = document.createElement("option");
-        opt.value = data.files[item][1];
-        opt.innerHTML = data.files[item][0];
-        list.appendChild(opt);
-      }
-    }
-  });
+  doApiCall("getfile", callback);
 }
 
 function enablePrint(value) {
@@ -131,28 +105,29 @@ function enableButton(buttonName, value) {
 }
 
 function manageStates(item) {
-  switch (item) {
-    case "print":
-      enablePrint(true);
-      enablePause(true);
-      enableStop(true);
-      break;
-    case "stop":
-      enablePrint(true);
-      enablePause(false);
-      enableStop(false);
-      break;
-    case "pause":
-      enablePrint(true);
-      enablePause(false);
-      enableStop(true);
-      break;
-    case "finished":
-      enablePrint(false);
-      enablePause(false);
-      enableStop(false);
-      break;
-  }
+  if ("status" in item)
+    switch (item.status) {
+      case "print":
+        enablePrint(true);
+        enablePause(true);
+        enableStop(true);
+        break;
+      case "stop":
+        enablePrint(true);
+        enablePause(false);
+        enableStop(false);
+        break;
+      case "pause":
+        enablePrint(true);
+        enablePause(false);
+        enableStop(true);
+        break;
+      case "finished":
+        enablePrint(false);
+        enablePause(false);
+        enableStop(false);
+        break;
+    }
 }
 
 var callback = function handleResults(err, data) {
@@ -160,15 +135,35 @@ var callback = function handleResults(err, data) {
   if (err !== null) {
     alert("Something went wrong: " + err);
   } else {
+    if (data == null) {
+      return;
+    }
+    if ("files" in data) {
+      for (item in data.files) {
+        if (item.startsWith("end")) {
+          item = item.replace("end", "");
+          break;
+        }
+        var opt = document.createElement("option");
+        opt.value = data.files[item][1];
+        opt.innerHTML = data.files[item][0];
+        list.appendChild(opt);
+      }
+    }
     for (var item in data) {
+      this.updateItem = null;
       if (item == "end") {
         continue;
       }
-      if (item == "status") {
-        manageStates(data[item]);
+      if (item == "status"||"sysinfo") {
+        
+        this.updateItem = data[item];
+        for (key in updateItem) {
+          if (key == "status")manageStates(data[item]);
+          ele = document.getElementById(key);
+          if (ele != null) ele.innerHTML = updateItem[key];
+        }
       }
-      ele = document.getElementById(item);
-      if (ele != null) ele.innerHTML = data[item];
     }
   }
 };
@@ -187,11 +182,13 @@ function executeAsync(func) {
 
 function doTenSecondRefresh() {
   console.log("status");
-  refreshFiles();
-  sleep(1000);
-  getSysInfo();
-  sleep(500);
   getStatus();
+  sleep(3000);
+  refreshFiles();
+  sleep(3000);
+  getSysInfo();
+  sleep(3000);
+
   setTimeout(doTenSecondRefresh, 15000);
 }
 
@@ -203,13 +200,13 @@ function sleep(ms) {
 
 function doSlowInitial() {
   refreshFiles();
-  sleep(1000);
+  sleep(3000);
   getSysInfo();
 
-  sleep(1000);
+  sleep(3000);
   getStatus();
-  sleep(1000);
-  getSysInfo();
+  sleep(3000);
+  
   executeAsync(doTenSecondRefresh());
 }
 doSlowInitial();
