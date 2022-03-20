@@ -53,8 +53,6 @@ function action(ele) {
   }
 }
 
-
-
 function mergeState(newstates) {
   const result = {};
   let key;
