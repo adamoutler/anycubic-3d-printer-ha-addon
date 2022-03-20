@@ -46,3 +46,9 @@ function dragElement(elmnt) {
       document.onmousemove = null;
     }
   }
+
+  
+// Make the DIV element draggable:
+dragElement(document.getElementById("box1"));
+dragElement(document.getElementById("box2"));
+dragElement(document.getElementById("box3"));

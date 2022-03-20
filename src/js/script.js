@@ -183,29 +183,21 @@ function getSysInfo() {
   doApiCall("sysinfo", callback);
 }
 
-// Make the DIV element draggable:
-dragElement(document.getElementById("box1"));
-dragElement(document.getElementById("box2"));
-dragElement(document.getElementById("box3"));
-
 function executeAsync(func) {
   setTimeout(func, 0);
 }
 
 function doTenSecondRefresh() {
   console.log("status");
+  refreshFiles();
+  sleep(1000);
   getSysInfo();
   sleep(500);
   getStatus();
   setTimeout(doTenSecondRefresh, 15000);
 }
 
-function doSixtySeocondRefresh() {
-  // do whatever you like here
-  console.log("files");
-  refreshFiles();
-  setTimeout(doSixtySeocondRefresh, 60000);
-}
+
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -221,6 +213,5 @@ function doSlowInitial() {
   sleep(1000);
   getSysInfo();
   executeAsync(doTenSecondRefresh());
-  executeAsync(doSixtySeocondRefresh());
 }
 doSlowInitial();
