@@ -10,9 +10,10 @@ function onSelect(item) {
 }
 
 function removeOptions(selectElement) {
-  var i, L = selectElement.options.length - 1;
-  for(i = L; i >= 0; i--) {
-     selectElement.remove(i);
+  var i,
+    L = selectElement.options.length - 1;
+  for (i = L; i >= 0; i--) {
+    selectElement.remove(i);
   }
 }
 
@@ -43,7 +44,6 @@ var callback = function handleResults(err, data) {
         continue;
       }
       if (item == "status" || "sysinfo") {
-
         this.updateItem = data[item];
         for (key in updateItem) {
           if (key == "status") manageStates(data[item]);
@@ -54,7 +54,6 @@ var callback = function handleResults(err, data) {
     }
   }
 };
-
 
 var doApiCall = function (command, callback) {
   var xhr = new XMLHttpRequest();
@@ -74,8 +73,6 @@ var doApiCall = function (command, callback) {
   };
   xhr.send();
 };
-
-
 
 function action(ele) {
   var id = ele.id;
@@ -103,10 +100,6 @@ function mergeState(newstates) {
     state[key] = newstates[key];
   }
 }
-
-
-
-
 
 function print() {
   document.getElementById("print").classList.add("disabled");
@@ -195,7 +188,7 @@ function executeAsync(func) {
 }
 
 function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 async function doTenSecondRefresh() {
@@ -208,7 +201,5 @@ async function doTenSecondRefresh() {
 
   executeAsync(doTenSecondRefresh());
 }
-
-
 
 executeAsync(doTenSecondRefresh);
