@@ -195,8 +195,6 @@ function doTenSecondRefresh() {
   setTimeout(doTenSecondRefresh, 15000);
 }
 
-
-
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
