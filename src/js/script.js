@@ -193,11 +193,11 @@ function sleep(ms) {
 
 async function doTenSecondRefresh() {
   refreshFiles();
-  await sleep(1000);
+  await sleep(3000);
   getStatus();
-  await sleep(1000);
+  await sleep(3000);
   getSysInfo();
-  await sleep(1000);
+  await sleep(3000);
 
   executeAsync(doTenSecondRefresh());
 }

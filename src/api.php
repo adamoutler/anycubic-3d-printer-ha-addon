@@ -110,7 +110,7 @@ while (sizeof($newarray) >= 1) {
 			
 			$size = sizeof($newarray);
 			$output->status=(object)NULL;
-			if ($size > 1) $output->status->status = $newarray[1];
+			$output->status->status = $newarray[1];
 			if (startsWith($newarray[2],"end")){
 				$newarray = remove_keys(count(array_keys((array)$output->status)), $newarray);
 				break;
@@ -126,7 +126,7 @@ while (sizeof($newarray) >= 1) {
 			if ($size > 10) $output->status->unknown1  = $newarray[10];
 			if ($size > 11) $output->status->layer_height  = $newarray[11];
 			if ($size > 12) $output->status->unknown2 = $newarray[12];
-			$newarray = remove_keys(sizeof($output), $newarray);
+			$newarray = remove_keys($size, $newarray);
 			break;
 		default:
 			$output->extra = (array) NULL;

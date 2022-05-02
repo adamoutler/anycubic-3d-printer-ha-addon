@@ -18,7 +18,6 @@
           </button>
         </div>
         <div class="toast-body">
-            See? Just like this.
         </div>
     </div>
     <div class="position-static  ">
@@ -34,7 +33,7 @@
     </div>
     <div id='window1' class='fr right window'>
         <div id="box1" class='title'>camera feed</div>
-        <img src=http://192.168.1.251:8080/?action=stream&1647305721063 />
+        <img src=http://192.168.1.251:8080/?action=stream&1647305721063 alt="Your browser may be blocking insecure content on a secure page.  You can allow insecure content, or disable the camera." />
 
     </div>
     <div id='window2' class='fl bottom window'>
