@@ -34,6 +34,9 @@ $data = "";
 function startsWith($haystack, $needle)
 {
 	$length = strlen($needle);
+	if (gettype($haystack)==="array"){
+		return substr($haystack[0], 0, $length) === $needle;
+	}
 	return substr($haystack, 0, $length) === $needle;
 }
 function endsWith($haystack, $needle)
