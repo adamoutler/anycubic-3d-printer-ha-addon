@@ -15,8 +15,8 @@ RUN apk add --no-cache php8-apache2 git && \
      ln -sf /proc/self/fd/1 /var/log/apache2/error.log;
 COPY run.sh /
 # hadolint ignore=SC2015
-RUN  /usr/bin/git clone https://github.com/adamoutler/anycubic-3d-printer-ha-addon.git && \
-     /usr/bin/git pull https://github.com/adamoutler/anycubic-3d-printer-ha-addon.git
+RUN  /usr/bin/git clone https://github.com/adamoutler/anycubic-3d-printer-ha-addon.git || echo already pulled; \
+     /usr/bin/git -C anycubic-3d-printer-ha-addon pull
 WORKDIR /data/anycubic-3d-printer-ha-addon
 RUN cp -R ./src/* /var/www/localhost/htdocs/ && \
      chown -R root:root /var/www/localhost/htdocs && \
