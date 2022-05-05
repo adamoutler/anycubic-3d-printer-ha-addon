@@ -48,14 +48,19 @@ var callback = function handleResults(err, data) {
         for (key in updateItem) {
           if (key == "status") manageStates(data[item]);
           if (key == "file") {
-            updateItem.internalName=updateItem[key].pop();
+            updateItem.internalName = updateItem[key].pop();
           }
-          if (key == "percent_complete"){
+          if (key == "percent_complete") {
             ele = document.getElementById("progress-bar");
-            ele.setAttribute("aria-valuenow",updateItem[key]);
-            ele.setAttribute("style","width: "+updateItem[key]+"%");
-            if (ele != null) ele.innerHTML = "<span class=\"sr-only\">"+this.updateItem.file+": "+updateItem[key]+"% complete </span>";
-
+            ele.setAttribute("aria-valuenow", updateItem[key]);
+            ele.setAttribute("style", "width: " + updateItem[key] + "%");
+            if (ele != null)
+              ele.innerHTML =
+                '<span class="sr-only">' +
+                this.updateItem.file +
+                ": " +
+                updateItem[key] +
+                "% complete </span>";
           } else {
             ele = document.getElementById(key);
             if (ele != null) ele.innerHTML = updateItem[key];
