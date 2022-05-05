@@ -120,9 +120,9 @@ while (sizeof($newarray) >= 1) {
 			}
 			if ($size > 2) $output->status->file = $newarray[2];
 			if ($size > 3) $output->status->total_layers = $newarray[3];
-			if ($size > 4) $output->status->layers_remaining = $newarray[4];
+			if ($size > 4) $output->status->percent_complete = $newarray[4];
 			if ($size > 5) $output->status->current_layer = $newarray[5];
-			if ($size > 6) $output->status->seconds_elapsed = $newarray[6];
+			if ($size > 6) $output->status->elapsed = $newarray[6];
 			if ($size > 7) $output->status->seconds_remaining = $newarray[7];
 			if ($size > 8) $output->status->total_volume = $newarray[8];
 			if ($size > 9) $output->status->mode  = $newarray[9];

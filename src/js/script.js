@@ -47,8 +47,19 @@ var callback = function handleResults(err, data) {
         this.updateItem = data[item];
         for (key in updateItem) {
           if (key == "status") manageStates(data[item]);
-          ele = document.getElementById(key);
-          if (ele != null) ele.innerHTML = updateItem[key];
+          if (key == "file") {
+            updateItem.internalName=updateItem[key].pop();
+          }
+          if (key == "percent_complete"){
+            ele = document.getElementById("progress-bar");
+            ele.setAttribute("aria-valuenow",updateItem[key]);
+            ele.setAttribute("style","width: "+updateItem[key]+"%");
+            if (ele != null) ele.innerHTML = "<span class=\"sr-only\">"+this.updateItem.file+": "+updateItem[key]+"% complete </span>";
+
+          } else {
+            ele = document.getElementById(key);
+            if (ele != null) ele.innerHTML = updateItem[key];
+          }
         }
       }
     }
