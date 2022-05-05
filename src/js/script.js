@@ -48,9 +48,9 @@ var callback = function handleResults(err, data) {
         for (key in updateItem) {
           if (key == "status") manageStates(data[item]);
           if (key == "file") {
-            updateItem.internalName=updateItem[key].pop();
-          } 
-          if (key == "monox"){
+            updateItem.internalName = updateItem[key].pop();
+          }
+          if (key == "monox") {
             continue;
           }
           if (key == "percent_complete") {
@@ -164,34 +164,33 @@ function enableStop(value) {
   enableButton("stop", value);
 }
 function manageStates(item) {
-  if ("status" in item)
-    progbar = document.getElementById("progress-bar");
-    switch (item.status) {
-      case "print":
-        enablePrint(true);
-        enablePause(true);
-        enableStop(true);
-        break;
-      case "stop":
-        progbar.setAttribute("aria-valuenow","-1");
-        progbar.setAttribute("style","width: 0%");
-        enablePrint(true);
-        enablePause(false);
-        enableStop(false);
-        break;
-      case "pause":
-        enablePrint(true);
-        enablePause(false);
-        enableStop(true);
-        break;
-      case "finish":
-        enablePrint(false);
-        enablePause(false);
-        enableStop(false);
-        progbar.setAttribute("aria-valuenow","100");
-        progbar.setAttribute("style","width: 100%");
-        break;
-    }
+  if ("status" in item) progbar = document.getElementById("progress-bar");
+  switch (item.status) {
+    case "print":
+      enablePrint(true);
+      enablePause(true);
+      enableStop(true);
+      break;
+    case "stop":
+      progbar.setAttribute("aria-valuenow", "-1");
+      progbar.setAttribute("style", "width: 0%");
+      enablePrint(true);
+      enablePause(false);
+      enableStop(false);
+      break;
+    case "pause":
+      enablePrint(true);
+      enablePause(false);
+      enableStop(true);
+      break;
+    case "finish":
+      enablePrint(false);
+      enablePause(false);
+      enableStop(false);
+      progbar.setAttribute("aria-valuenow", "100");
+      progbar.setAttribute("style", "width: 100%");
+      break;
+  }
 }
 
 function refreshFiles() {
