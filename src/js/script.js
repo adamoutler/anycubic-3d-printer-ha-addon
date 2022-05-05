@@ -222,7 +222,7 @@ async function doTenSecondRefresh() {
   getSysInfo();
   await sleep(3000);
 
-  (async () => executeAsync(doTenSecondRefresh()));
+  async () => executeAsync(doTenSecondRefresh());
 }
 
 executeAsync(doTenSecondRefresh);
