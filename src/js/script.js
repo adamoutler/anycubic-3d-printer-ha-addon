@@ -206,7 +206,7 @@ function getSysInfo() {
   doApiCall("sysinfo", callback);
 }
 
-function executeAsync(func) {
+async function executeAsync(func) {
   setTimeout(func);
 }
 
@@ -222,7 +222,7 @@ async function doTenSecondRefresh() {
   getSysInfo();
   await sleep(3000);
 
-  executeAsync(doTenSecondRefresh());
+  (async () => executeAsync(doTenSecondRefresh()));
 }
 
 executeAsync(doTenSecondRefresh);
