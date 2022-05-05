@@ -13,7 +13,7 @@ if (!isset($_GET["cmd"])) {
 }
 
 $socket = fsockopen($_GET["server"], $_GET["port"]);
-if (!defined('STDIN')){
+if (!defined('STDIN')) {
 	define('STDIN', fopen("php://stdin", "r"));
 }
 
@@ -34,7 +34,7 @@ $data = "";
 function startsWith($haystack, $needle)
 {
 	$length = strlen($needle);
-	if (gettype($haystack)==="array"){
+	if (gettype($haystack) === "array") {
 		return substr($haystack[0], 0, $length) === $needle;
 	}
 	return substr($haystack, 0, $length) === $needle;
@@ -52,7 +52,7 @@ $endtime = time() + 5;
 while (!endsWith($data, "end") && time() < $endtime) {
 	$data = fread($socket, 8192);
 }
-$data=trim($data);
+$data = trim($data);
 set_time_limit(30);
 
 fclose($socket);
@@ -66,7 +66,7 @@ foreach ($array as &$value) {
 	}
 	array_push($newarray, $value);
 }
-if (sizeof($array)==1 && $array[0]==""){
+if (sizeof($array) == 1 && $array[0] == "") {
 	return;
 }
 function remove_keys(int $number, $arr)
@@ -87,7 +87,7 @@ $output->type = "monox";
 while (sizeof($newarray) >= 1) {
 	switch ($newarray[0]) {
 		case ("sysinfo"):
-			$output->sysinfo=(object)NULL;
+			$output->sysinfo = (object)NULL;
 			$output->sysinfo->model = $newarray[1];
 			$output->sysinfo->firmware = $newarray[2];
 			$output->sysinfo->serial = $newarray[3];
@@ -110,15 +110,19 @@ while (sizeof($newarray) >= 1) {
 
 			break;
 		case ("getstatus"):
-			
+
 			$size = sizeof($newarray);
-			$output->status=(object)NULL;
+			$output->status = (object)NULL;
 			$output->status->status = $newarray[1];
-			if (startsWith($newarray[2],"end")){
+			if (startsWith($newarray[2], "end") ) {
 				$newarray = remove_keys(count(array_keys((array)$output->status)), $newarray);
 				break;
 			}
-			if ($size > 2) $output->status->file = $newarray[2];
+			if ($size > 2)	$output->status->file = $newarray[2];
+			if (startsWith($newarray[3], "end")){
+				$newarray = remove_keys(count(array_keys((array)$output->status)), $newarray);
+				break;
+			}
 			if ($size > 3) $output->status->total_layers = $newarray[3];
 			if ($size > 4) $output->status->percent_complete = $newarray[4];
 			if ($size > 5) $output->status->current_layer = $newarray[5];

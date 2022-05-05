@@ -49,8 +49,10 @@ var callback = function handleResults(err, data) {
           if (key == "status") manageStates(data[item]);
           if (key == "file") {
             updateItem.internalName=updateItem[key].pop();
-          }
-          if (key == "percent_complete"){
+          } 
+          if (key == "monox"){
+            continue;
+          } else if (key == "percent_complete"){
             ele = document.getElementById("progress-bar");
             ele.setAttribute("aria-valuenow",updateItem[key]);
             ele.setAttribute("style","width: "+updateItem[key]+"%");
@@ -157,6 +159,7 @@ function enableStop(value) {
 }
 function manageStates(item) {
   if ("status" in item)
+    progbar = document.getElementById("progress-bar");
     switch (item.status) {
       case "print":
         enablePrint(true);
@@ -164,6 +167,8 @@ function manageStates(item) {
         enableStop(true);
         break;
       case "stop":
+        progbar.setAttribute("aria-valuenow","-1");
+        progbar.setAttribute("style","width: 0%");
         enablePrint(true);
         enablePause(false);
         enableStop(false);
@@ -173,10 +178,12 @@ function manageStates(item) {
         enablePause(false);
         enableStop(true);
         break;
-      case "finished":
+      case "finish":
         enablePrint(false);
         enablePause(false);
         enableStop(false);
+        progbar.setAttribute("aria-valuenow","100");
+        progbar.setAttribute("style","width: 100%");
         break;
     }
 }
