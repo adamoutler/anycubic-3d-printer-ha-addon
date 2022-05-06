@@ -118,7 +118,7 @@ jobs:
       - lint-addon
       - lint-hadolint
       - lint-json
-      - lint-php
+      - lint-phplint
       - lint-markdown
       - lint-prettier
       - lint-shellcheck
@@ -187,7 +187,7 @@ jobs:
       - lint-addon
       - lint-hadolint
       - lint-json
-      - lint-php
+      - lint-phplint
       - lint-markdown
       - lint-prettier
       - lint-shellcheck
