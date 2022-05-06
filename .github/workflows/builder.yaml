@@ -112,6 +112,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.MYGITHUBTOKEN }}
   build:
+    runs-on: ubuntu-latest
     name: Build Docker Image
     needs:
       - information
