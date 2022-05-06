@@ -111,14 +111,83 @@ jobs:
           prettier_options: --write **/*.{json,js,md,yaml}
         env:
           GITHUB_TOKEN: ${{ secrets.MYGITHUBTOKEN }}
-
   build:
+    name: Build Docker Image
+    needs:
+      - information
+      - lint-addon
+      - lint-hadolint
+      - lint-json
+      - lint-php
+      - lint-markdown
+      - lint-prettier
+      - lint-shellcheck
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        architecture: ${{ fromJson(needs.information.outputs.architectures) }}
+    steps:
+      - name: ⤵️ Check out code from GitHub
+        uses: actions/checkout@v2.3.4
+      - name: 🏗 Set up build cache
+        id: cache
+        uses: actions/cache@v2.1.5
+        with:
+          path: /tmp/.docker-cache
+          key: docker-${{ github.ref }}-docker-${{ github.sha }}
+          restore-keys: |
+            docker-${{ github.ref }}-image
+      - name: 🏗 Set up QEMU
+        uses: docker/setup-qemu-action@v1.0.2
+      - name: 🏗 Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1.1.2
+      - name: ℹ️ Compose build flags
+        id: flags
+        run: |
+          echo "::set-output name=date::$(date +"%Y-%m-%dT%H:%M:%SZ")"
+          from=$(jq --raw-output ".build_from.${{ matrix.architecture }}" "${{ needs.information.outputs.build }}")
+          echo "::set-output name=from::${from}"
+          echo "::set-output name=platform::linux/amd64"
+      - name: get version
+        id: version
+        uses: notiz-dev/github-action-json-property@release
+        with:
+          path: "anycubic3dPrinterAddon/config.json"
+          prop_path: "version"
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: adamoutler
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: 🚀 Build
+        uses: docker/build-push-action@v2.4.0
+        with:
+          push: true
+          tags: adamoutler/anycubic3dprinter:${{steps.version.outputs.prop}}
+          context: ${{ needs.information.outputs.target }}
+          file: ${{ needs.information.outputs.target }}/Dockerfile
+          cache-from: |
+            type=local,src=/tmp/.docker-cache
+            ghcr.io/adamoutler/${{ needs.information.outputs.slug }}/amd64:edge
+          cache-to: type=local,mode=max,dest=/tmp/.docker-cache
+          platforms: ${{ steps.flags.outputs.platform }}
+          build-args: |
+            BUILD_ARCH=amd64
+            BUILD_DATE=${{ steps.flags.outputs.date }}
+            BUILD_DESCRIPTION=${{ needs.information.outputs.description }}
+            BUILD_FROM=${{ steps.flags.outputs.from }}
+            BUILD_NAME=${{ needs.information.outputs.name }}
+            BUILD_REF=${{ github.sha }}
+            BUILD_REPOSITORY=${{ github.repository }}
+            BUILD_VERSION=edge
+  build-hass:
     name: Build ${{ matrix.architecture }}
     needs:
       - information
       - lint-addon
       - lint-hadolint
       - lint-json
+      - lint-php
       - lint-markdown
       - lint-prettier
       - lint-shellcheck
