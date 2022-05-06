@@ -57,13 +57,14 @@ var callback = function handleResults(err, data) {
             ele = document.getElementById("progress-bar");
             ele.setAttribute("aria-valuenow", updateItem[key]);
             ele.setAttribute("style", "width: " + updateItem[key] + "%");
-            if (ele != null)
+            if (ele != null) {
               ele.innerHTML =
                 '<span class="sr-only">' +
-                this.updateItem.file +
+                this.updateItem.file[0] +
                 ": " +
                 updateItem[key] +
                 "% complete </span>";
+            }
           } else {
             ele = document.getElementById(key);
             if (ele != null) ele.innerHTML = updateItem[key];
@@ -164,7 +165,7 @@ function enableStop(value) {
   enableButton("stop", value);
 }
 function manageStates(item) {
-  if ("status" in item) progbar = document.getElementById("progress-bar");
+  progbar = document.getElementById("progress-bar");
   switch (item.status) {
     case "print":
       enablePrint(true);
@@ -222,7 +223,7 @@ async function doTenSecondRefresh() {
   getSysInfo();
   await sleep(3000);
 
-  async () => executeAsync(doTenSecondRefresh());
+  executeAsync(doTenSecondRefresh);
 }
 
 executeAsync(doTenSecondRefresh);
