@@ -126,19 +126,19 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v3
-      
+
       - name: Log in to Docker Hub
         uses: docker/login-action@v1
         with:
           username: adamoutler
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      
+
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@v3
         with:
           images: adamoutler/anycubic3dPrinter
-      
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
