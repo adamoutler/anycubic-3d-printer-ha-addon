@@ -141,7 +141,7 @@ jobs:
       - name: ℹ️ Compose build flags
         id: flags
         run: |
-          echo "::set-output name=date::$(date +"%Y-%m-%dT%H:%M:%SZ")"
+          echo "::set-output name=date::$(date +%Y-%m-%dT%H:%M:%SZ)"
           from=$(jq --raw-output ".build_from.${{ matrix.architecture }}" "${{ needs.information.outputs.build }}")
           echo "::set-output name=from::${from}"
           echo "::set-output name=platform::linux/amd64"
