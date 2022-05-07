@@ -20,8 +20,11 @@ if (!defined('STDIN')) {
 if (!$socket) return;
 stream_set_blocking($socket, 0);
 stream_set_blocking(STDIN, 0);
-
-fwrite($socket, trim($_GET["cmd"] . "\n"));
+if (endsWith($_GET["cmd"], ",end")) {
+	fwrite($socket, trim($_GET["cmd"] . "\n"));
+} else {
+	fwrite($socket, trim($_GET["cmd"] . ",end\n"));
+}
 
 $read   = array($socket, STDIN);
 if (!is_resource($socket)) return;
@@ -114,12 +117,12 @@ while (sizeof($newarray) >= 1) {
 			$size = sizeof($newarray);
 			$output->status = (object)NULL;
 			$output->status->status = $newarray[1];
-			if (startsWith($newarray[2], "end") ) {
+			if (startsWith($newarray[2], "end")) {
 				$newarray = remove_keys(count(array_keys((array)$output->status)), $newarray);
 				break;
 			}
 			if ($size > 2)	$output->status->file = $newarray[2];
-			if (startsWith($newarray[3], "end")){
+			if (startsWith($newarray[3], "end")) {
 				$newarray = remove_keys(count(array_keys((array)$output->status)), $newarray);
 				break;
 			}
