@@ -38,32 +38,28 @@
 
     </div>
     <div id='window2' class='top left window'>
-        <div id="box2" class='title'><span>status: <span id="status"></span></span></div>
+        <div id="box2" class='title'><span>status: <span id="status"></span> <span id="file"></span> <span id="total_volume"></span></span></div>
         <div class='justify-content-between'>
             <div><span>
                     <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" id="progress-bar"><span id="percent_complete"></span><span id="file"></span></progress></div>
+                        <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" id="progress-bar"><span id="percent_complete"></span></progress></div>
                 </span>
             </div>
-            <table>
+            <table class="table">
                 <thead class="thead-dark">
                     <tr>
-                        <th scope="col">total layers</th>
-                        <th scope="col">current layer</th>
-                        <th scope="col">elapsed</th>
-                        <th scope="col">remaining</th>
-                        <th scope="col">total volume</th>
+                        <th scope="col">layers</th>
                         <th scope="col">layer height</th>
+                        <th scope="col">remaining</th>
+                        <th scope="col">elapsed</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td id="total_layers"></td>
-                        <td id="current_layer"></td>
-                        <td id="elapsed"></td>
-                        <td id="seconds_remaining"></td>
-                        <td id="total_volume"></td>
+                        <td><span><span id="current_layer"></span>/<span id="total_layers"></span></span> </td>
                         <td id="layer_height"></td>
+                        <td id="seconds_remaining"></td>
+                        <td id="elapsed"></td>
                     </tr>
                 <tbody>
             </table>
