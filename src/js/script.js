@@ -60,7 +60,6 @@ var callback = function handleResults(err, data) {
             if (ele != null) {
               ele.innerHTML =
                 '<span class="sr-only">' +
-
                 updateItem[key] +
                 "% complete </span>";
             }
@@ -68,7 +67,8 @@ var callback = function handleResults(err, data) {
             var date = new Date(null);
             date.setSeconds(updateItem[key]); // specify value for SECONDS here
             ele = document.getElementById(key);
-            if (ele != null) ele.innerHTML = date.toISOString().substring(11, 19);
+            if (ele != null)
+              ele.innerHTML = date.toISOString().substring(11, 19);
           } else {
             ele = document.getElementById(key);
             if (ele != null) ele.innerHTML = updateItem[key];
