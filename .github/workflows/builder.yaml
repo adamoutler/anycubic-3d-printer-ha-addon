@@ -143,7 +143,7 @@ jobs:
         uses: notiz-dev/github-action-json-property@release
         with:
           path: "anycubic3dPrinterAddon/config.json"
-          prop_path: "version"  
+          prop_path: "version"
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
