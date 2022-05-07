@@ -99,7 +99,7 @@ while (sizeof($newarray) >= 1) {
 			unset($newarray[0]);
 			$files = (array) null;
 			foreach (range(1, sizeof($newarray) - 1) as $file) {
-				if (str_starts_with($file, "end") || !is_array($newarray[$file])) {
+				if (startsWith($file, "end") || !is_array($newarray[$file])) {
 					break;
 				}
 				array_push($files, $newarray[$file]);
