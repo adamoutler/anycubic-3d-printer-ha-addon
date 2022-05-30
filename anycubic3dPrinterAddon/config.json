@@ -15,15 +15,15 @@
   "url": "https://github.com/adamoutler/anycubic-3d-printer-ha-addon",
   "map": ["config", "addons", "share", "media"],
   "options": {
-    "Mono X IP Addresses": "192.168.1.254",
-    "Mono X Ports": "6000",
+    "Mono X IP Address": "192.168.1.254",
+    "Mono X Port": "6000",
     "Use a Camera": false,
-    "Camera URLs": "http://192.168.1.251:8080/?action=stream&1647305721063"
+    "Camera URL": "http://192.168.1.251:8080/?action=stream&1647305721063"
   },
   "schema": {
-    "Mono X IP Addresses": "str",
-    "Mono X Ports": "str",
+    "Mono X IP Address": "str",
+    "Mono X Port": "str",
     "Use a Camera": "bool",
-    "Camera URLs": "str"
+    "Camera URL": "str"
   }
 }

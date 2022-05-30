@@ -172,7 +172,7 @@ function manageStates(item) {
   progbar = document.getElementById("progress-bar");
   switch (item.status) {
     case "print":
-      enablePrint(true);
+      enablePrint(false);
       enablePause(true);
       enableStop(true);
       break;
