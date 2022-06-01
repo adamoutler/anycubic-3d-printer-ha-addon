@@ -59,7 +59,7 @@ var callback = function handleResults(err, data) {
           if (key == "percent_complete") {
             ele = document.getElementById("progress-bar");
             ele.setAttribute("aria-valuenow", updateItem[key]);
-            if (updateItem[key]<10){
+            if (updateItem[key] < 10) {
               ele.setAttribute("style", "width: 5%");
             } else {
               ele.setAttribute("style", "width: " + updateItem[key] + "%");
