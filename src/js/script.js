@@ -7,6 +7,9 @@ function onSelect(item) {
   selectedFileName = item.selectedOptions[0].innerHTML;
   selectedFile = item.value;
   document.getElementById("selected").innerHTML = this.selectedFileName;
+  doApiCall("getPreview2," + "47.pwmb" + ",end", function (err, data) {
+    //do stuff here.
+  });
 }
 
 function removeOptions(selectElement) {
@@ -56,7 +59,11 @@ var callback = function handleResults(err, data) {
           if (key == "percent_complete") {
             ele = document.getElementById("progress-bar");
             ele.setAttribute("aria-valuenow", updateItem[key]);
-            ele.setAttribute("style", "width: " + updateItem[key] + "%");
+            if (updateItem[key]<10){
+              ele.setAttribute("style", "width: 5%");
+            } else {
+              ele.setAttribute("style", "width: " + updateItem[key] + "%");
+            }
             if (ele != null) {
               ele.innerHTML =
                 '<span class="sr-only">' +
