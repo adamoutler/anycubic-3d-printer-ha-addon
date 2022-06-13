@@ -1,13 +1,14 @@
 selectedFile = "";
 selectedFileName = "";
-
+secondsRemaining = 0;
+secondsElapsed = 0;
 state = {};
 
 function onSelect(item) {
   selectedFileName = item.selectedOptions[0].innerHTML;
   selectedFile = item.value;
   document.getElementById("selected").innerHTML = this.selectedFileName;
-  doApiCall("getPreview2," + "47.pwmb" + ",end", function (err, data) {
+  doApiCall("getPreview2," + "60.pwmb" + ",end", function (err, data) {
     //do stuff here.
   });
 }
@@ -237,4 +238,29 @@ async function doTenSecondRefresh() {
   executeAsync(doTenSecondRefresh);
 }
 
+async function doTimerUpdates() {
+  progbar = document.getElementById("progress-bar");
+  var date = new Date(null);
+  if (state.status != null &&  state.status.status == "print") {
+   
+    if (secondsRemaining != null) {
+      secondsRemaining--;
+      date.setSeconds(secondsRemaining); // specify value for SECONDS here
+      elapsedele = document.getElementById("remaining");
+      remainingele = document.getElementById("seconds_remaining");
+      remainingele.innerHTML = date.toISOString().substring(11, 19);
+
+    }
+    if (secondsElapsed != null) {
+      secondsElapsed++;
+      date.setSeconds(secondsElapsed); // specify value for SECONDS here
+      elapsedele = document.getElementById("elapsed");
+      elapsedele.innerHTML = date.toISOString().substring(11, 19);
+    }
+  } 
+  await sleep(1000);
+  executeAsync(doTimerUpdates);
+}
+
 executeAsync(doTenSecondRefresh);
+executeAsync(doTimerUpdates);

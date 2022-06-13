@@ -50,9 +50,9 @@ function endsWith($haystack, $needle)
 	}
 	return substr($haystack, -$length) === $needle;
 }
-set_time_limit(10);
-$endtime = time() + 5;
-while (!endsWith($data, "end") && time() < $endtime) {
+set_time_limit(15);
+$endtime = time() + 15;
+while (!endsWith($data, "end") && !endsWith($data,"\n\n") && time() < $endtime) {
 	$data = fread($socket, 8192);
 }
 $data = trim($data);
@@ -111,6 +111,16 @@ while (sizeof($newarray) >= 1) {
 			$newarray = remove_keys(sizeof($files), $newarray);
 
 
+			break;
+		case ("getPreview1"):
+
+			break;
+		case ("getPreview2"):
+			$path = "img";
+			if (!is_dir($path)) {
+				mkdir($path, 0777, true);
+			}
+			
 			break;
 		case ("getstatus"):
 

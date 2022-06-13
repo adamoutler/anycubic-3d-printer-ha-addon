@@ -1,7 +1,7 @@
 {
   "name": "Anycubic 3D Printer",
   "image": "adamoutler/{arch}-anycubic3dprinter",
-  "version": "0.1j",
+  "version": "0.1k",
   "slug": "anycubic_3d_printer",
   "description": "Controls and Monitoring for MonoX 3D Printers.",
   "arch": ["armhf", "armv7", "aarch64", "i386", "amd64"],
@@ -18,7 +18,7 @@
     "Mono X IP Address": "192.168.1.254",
     "Mono X Port": "6000",
     "Use a Camera": false,
-    "Camera URL": "http://192.168.1.251:8080/?action=stream&1647305721063"
+    "Camera URL": "https://shinobi.adamoutler.com/fDLm4zJN5YtAkb5wN6xpvYH8SmmYqv/mjpeg/f5OZZ4FosU/vlJcRb6MvO"
   },
   "schema": {
     "Mono X IP Address": "str",
