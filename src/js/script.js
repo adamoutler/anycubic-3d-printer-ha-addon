@@ -71,12 +71,10 @@ var callback = function handleResults(err, data) {
                 updateItem[key] +
                 "% complete </span>";
             }
-          } else if (key == "seconds_remaining"){
-            secondsRemaining=updateItem[key]
-
-          } else if ( key == "elapsed") {
-              secondsElapsed=updateItem[key];
-        
+          } else if (key == "seconds_remaining") {
+            secondsRemaining = updateItem[key];
+          } else if (key == "elapsed") {
+            secondsElapsed = updateItem[key];
           } else {
             ele = document.getElementById(key);
             if (ele != null) ele.innerHTML = updateItem[key];
@@ -240,9 +238,9 @@ async function doTenSecondRefresh() {
 
 async function doTimerUpdates() {
   progbar = document.getElementById("progress-bar");
- 
-  if (state.status != null &&  state.status.status == "print") {
-     if (secondsRemaining != null) {
+
+  if (state.status != null && state.status.status == "print") {
+    if (secondsRemaining != null) {
       var date = new Date(null);
       secondsRemaining--;
       date.setSeconds(secondsRemaining); // specify value for SECONDS here
