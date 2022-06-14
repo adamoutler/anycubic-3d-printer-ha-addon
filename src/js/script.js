@@ -71,12 +71,12 @@ var callback = function handleResults(err, data) {
                 updateItem[key] +
                 "% complete </span>";
             }
-          } else if (key == "seconds_remaining" || key == "elapsed") {
-            var date = new Date(null);
-            date.setSeconds(updateItem[key]); // specify value for SECONDS here
-            ele = document.getElementById(key);
-            if (ele != null)
-              ele.innerHTML = date.toISOString().substring(11, 19);
+          } else if (key == "seconds_remaining"){
+            secondsRemaining=updateItem[key]
+
+          } else if ( key == "elapsed") {
+              secondsElapsed=updateItem[key];
+        
           } else {
             ele = document.getElementById(key);
             if (ele != null) ele.innerHTML = updateItem[key];
@@ -240,18 +240,19 @@ async function doTenSecondRefresh() {
 
 async function doTimerUpdates() {
   progbar = document.getElementById("progress-bar");
-  var date = new Date(null);
+  
   if (state.status != null &&  state.status.status == "print") {
    
     if (secondsRemaining != null) {
+      var date = new Date(null);
       secondsRemaining--;
       date.setSeconds(secondsRemaining); // specify value for SECONDS here
-      elapsedele = document.getElementById("remaining");
       remainingele = document.getElementById("seconds_remaining");
       remainingele.innerHTML = date.toISOString().substring(11, 19);
 
     }
     if (secondsElapsed != null) {
+      var date = new Date(null);
       secondsElapsed++;
       date.setSeconds(secondsElapsed); // specify value for SECONDS here
       elapsedele = document.getElementById("elapsed");
