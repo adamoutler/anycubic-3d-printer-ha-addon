@@ -240,16 +240,14 @@ async function doTenSecondRefresh() {
 
 async function doTimerUpdates() {
   progbar = document.getElementById("progress-bar");
-  
+ 
   if (state.status != null &&  state.status.status == "print") {
-   
-    if (secondsRemaining != null) {
+     if (secondsRemaining != null) {
       var date = new Date(null);
       secondsRemaining--;
       date.setSeconds(secondsRemaining); // specify value for SECONDS here
       remainingele = document.getElementById("seconds_remaining");
       remainingele.innerHTML = date.toISOString().substring(11, 19);
-
     }
     if (secondsElapsed != null) {
       var date = new Date(null);
@@ -258,7 +256,7 @@ async function doTimerUpdates() {
       elapsedele = document.getElementById("elapsed");
       elapsedele.innerHTML = date.toISOString().substring(11, 19);
     }
-  } 
+  }
   await sleep(1000);
   executeAsync(doTimerUpdates);
 }
