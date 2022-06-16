@@ -168,10 +168,10 @@ jobs:
         architecture: ${{ fromJson(needs.information.outputs.architectures) }}
     steps:
       - name: ⤵️ Check out code from GitHub
-        uses: actions/checkout@v3.02
+        uses: actions/checkout@v3
       - name: 🏗 Set up build cache
         id: cache
-        uses: actions/cache@v3.04
+        uses: actions/cache@v3
         with:
           path: /tmp/.docker-cache
           key: docker-${{ github.ref }}-${{ matrix.architecture }}-${{ github.sha }}
