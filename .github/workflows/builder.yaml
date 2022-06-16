@@ -169,14 +169,7 @@ jobs:
     steps:
       - name: ⤵️ Check out code from GitHub
         uses: actions/checkout@v3
-      - name: 🏗 Set up build cache
-        id: cache
-        uses: actions/cache@v3
-        with:
-          path: /tmp/.docker-cache
-          key: docker-${{ github.ref }}-${{ matrix.architecture }}-${{ github.sha }}
-          restore-keys: |
-            docker-${{ github.ref }}-${{ matrix.architecture }}
+
       - name: 🏗 Set up QEMU
         uses: docker/setup-qemu-action@v2.0.0
       - name: 🏗 Set up Docker Buildx
@@ -219,10 +212,6 @@ jobs:
           tags: adamoutler/${{ matrix.architecture }}-anycubic3dprinter:${{steps.version.outputs.prop}}
           context: ${{ needs.information.outputs.target }}
           file: ${{ needs.information.outputs.target }}/Dockerfile
-          cache-from: |
-            type=local,src=/tmp/.docker-cache
-            ghcr.io/adamoutler/${{ needs.information.outputs.slug }}/${{ matrix.architecture }}:${{steps.version.outputs.prop}}
-          cache-to: type=local,mode=max,dest=/tmp/.docker-cache
           platforms: ${{ steps.flags.outputs.platform }}
           build-args: |
             BUILD_ARCH=${{ matrix.architecture }}
