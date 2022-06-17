@@ -232,7 +232,7 @@ async function doTenSecondRefresh() {
   await sleep(3000);
   refreshFiles();
   await sleep(3000);
-  
+
   executeAsync(doTenSecondRefresh);
 }
 
