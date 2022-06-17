@@ -21,15 +21,11 @@
         <div class="toast-body">
         </div>
     </div>
-    <div class="position-static  ">
-        <span>
-            <div>
-                <h1 id="model"> Anycubic </h1>
-            </div>
-            <div>
-                <span id="firmware"></span>
-            </div>
-        </span>
+    <div class="position-static">
+        <row class="d-inline-flex align-items-baseline">
+                <h1 class="align-bottom" id="model"> Anycubic </h1>
+                <p class="align-bottom" id="firmware"></p>
+        </row>
 
     </div>
     <div class="block">
@@ -126,8 +122,12 @@
     print "const ip=\"" . $config['MONO_X_IP'] . "\";\n";
     print "const port=\"" . $config['MONO_X_PORT'] . "\";\n";
     print "const camera=\"" . $config['MONO_X_CAMERA'] . "\";\n";
-
+    print "const usecamera=\"" . $config['MONO_X_USE_CAMERA'] . "\";\n";
     ?>
+    if (usecamera != "true" && usecamera != "1"){
+        document.getElementById("window1").hidden=true;
+
+    }
     document.getElementById("camerabox").setAttribute("src", camera);
 </script>
 

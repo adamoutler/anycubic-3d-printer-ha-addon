@@ -226,13 +226,13 @@ function sleep(ms) {
 }
 
 async function doTenSecondRefresh() {
-  refreshFiles();
+  getSysInfo();
   await sleep(3000);
   getStatus();
   await sleep(3000);
-  getSysInfo();
+  refreshFiles();
   await sleep(3000);
-
+  
   executeAsync(doTenSecondRefresh);
 }
 
@@ -258,6 +258,7 @@ async function doTimerUpdates() {
   await sleep(1000);
   executeAsync(doTimerUpdates);
 }
+getStatus();
 
 executeAsync(doTenSecondRefresh);
 executeAsync(doTimerUpdates);
