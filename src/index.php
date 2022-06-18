@@ -29,7 +29,7 @@
 
     </div>
     <div class="block">
-        <div id="box2" class='title'><span>status: <span id="status"></span> <span id="file"></span> <span id="total_volume"></span></span></div>
+        <div id="box2" class='title'><span>status: <b><span id="status"></span></b> <span id="file"></span> <span id="total_volume"></span></span></div>
         <div><span>
                 <div class="progress">
                     <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" id="progress-bar"><span id="percent_complete"></span></progress></div>
