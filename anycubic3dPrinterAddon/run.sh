@@ -18,7 +18,7 @@ cat << EOF > ${configFile};
 \$config['MONO_X_IP'] = '${ip}';
 \$config['MONO_X_PORT'] = '${port}';
 \$config['USE_CAMERA'] = '${useCam}';
-\$config['MONO_X_CAMERA'] = '${camera}';
+\$config['MONO_X_USE_CAMERA'] = '${camera}';
 
 EOF
 chmod 755 ${configFile};
