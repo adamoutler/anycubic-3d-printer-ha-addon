@@ -1,6 +1,9 @@
 {
   "version": "0.2.0",
   "configurations": [
+
+
+
     {
       "name": "Launch application",
       "type": "php",
@@ -21,8 +24,9 @@
       "request": "launch",
       "program": "${file}",
       "cwd": "${fileDirname}",
-      "env": { "QUERY_STRING": "server=192.168.1.254&port=6000&cmd=getstatus" },
+      "env": { "QUERY_STRING": "server=192.168.1.254&port=6000&cmd=getPreview2,129.pwmb,end" },
       "port": 9000
+      
     }
   ]
 }
