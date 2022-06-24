@@ -82,17 +82,17 @@ function getFileFromPrinter($address)
     //IMPORTANT, do a split string on semicolon;
     //
     //
-    $byte_array = unpack('C*', $actualvalue);
+    $byte_array = unpack('S*', $actualvalue);
     $output_array = array();
 
     file_put_contents('OUTPUTFILE', $actualvalue);
 }
 
-getFileFromPrinter($address);
+//getFileFromPrinter($address);
 
 $actualvalue = file_get_contents('OUTPUTFILE');
 //$actualvalue = trim(explode(";", $actualvalue)[1]);
-$byte_array = unpack('S*', $actualvalue);
+$byte_array = unpack('v*', $actualvalue);
 
 
 
@@ -104,26 +104,81 @@ $width = 224;
 $height = 160;
 $dpi = 180;
 $im = imagecreatetruecolor($width, $height);
+$bla = imagecolorallocate($im, 0, 0, 0);
 $y = 0;
 for ($pixel = 1; $pixel < sizeof($byte_array); $pixel++) {
-
     $p = $byte_array[$pixel];
-
+    //if ($p == 25152) continue;
     $x = floor(floor($pixel) % $width);
     $y = floor(floor($pixel) / $width);
-    $aa = ($p >>32) & 0xff;
-    $a = ($p >> 24) & 0xff;
-    $r = ($p >>16) & 0xff;
-    $g = ($p >> 8 & 0xff);
-    $b = (($p) & 0xf);
-    // $rgb = hsvtorgb ($r, $g, $b);
-    $color = imagecolorallocate($im, $r,  $g,  $b);
-   // $color = (int)((($r *0xF) * 6 / 256) * 36 + (($g*0xf) * 6 / 256) * 6 + (($b*0xf) * 6 / 256));
+    $bg = ($p >> 8 & 0xff);
+    $r = (($p) & 0xf) * 0xf;
+    $g = ($bg >> 4  & 0xf) * 0xf;
+    $b = ($bg >>8 & 0xf) * 0xf;
+    $color = intval(imagecolorallocate($im, $r, $g, $g));
 
     imagesetpixel($im, $x, $y, $color);
 }
-//imagetruecolortopalette($im, true, 256);
+function ColorHSLToRGB($h, $s, $l)
+{
 
+    $r = $l;
+    $g = $l;
+    $b = $l;
+    $v = ($l <= 0.5) ? ($l * (1.0 + $s)) : ($l + $s - $l * $s);
+    if ($v > 0) {
+        $m;
+        $sv;
+        $sextant;
+        $fract;
+        $vsf;
+        $mid1;
+        $mid2;
+
+        $m = $l + $l - $v;
+        $sv = ($v - $m) / $v;
+        $h *= 6.0;
+        $sextant = floor($h);
+        $fract = $h - $sextant;
+        $vsf = $v * $sv * $fract;
+        $mid1 = $m + $vsf;
+        $mid2 = $v - $vsf;
+
+        switch ($sextant) {
+            case 0:
+                $r = $v;
+                $g = $mid1;
+                $b = $m;
+                break;
+            case 1:
+                $r = $mid2;
+                $g = $v;
+                $b = $m;
+                break;
+            case 2:
+                $r = $m;
+                $g = $v;
+                $b = $mid1;
+                break;
+            case 3:
+                $r = $m;
+                $g = $mid2;
+                $b = $v;
+                break;
+            case 4:
+                $r = $mid1;
+                $g = $m;
+                $b = $v;
+                break;
+            case 5:
+                $r = $v;
+                $g = $m;
+                $b = $mid2;
+                break;
+        }
+    }
+    return array('r' => $r * 255.0, 'g' => $g * 255.0, 'b' => $b * 255.0);
+}
 imagecolortransparent($im, 25152); //transparent background
 ImagePNG($im, 'name.png');
 imagedestroy($im);

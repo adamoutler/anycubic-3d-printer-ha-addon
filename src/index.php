@@ -21,15 +21,18 @@
         <div class="toast-body">
         </div>
     </div>
-    <div class="position-static">
-        <row class="d-inline-flex align-items-baseline">
-                <h1 class="align-bottom" id="model"> Anycubic </h1>
-                <p class="align-bottom" id="firmware"></p>
+    <div class="position-static heading-box">
+        <row class="d-inline-flex ">
+            <img class="header-image" src="img/anycubic.jpg" />
+            <div class="d-flex-column">
+                <p class="header-title align-bottom display-5" id="model"> Anycubic </p>
+                <p class="header-text align-bottom lead" id="firmware"></p>
+            </div>
         </row>
 
     </div>
     <div class="block">
-        <div id="box2" class='title'><span>status: <b><span id="status"></span></b> <span id="file"></span> <span id="total_volume"></span></span></div>
+        <div id="box2" class='title'><span><span class="lead"> Status:</span> <span id="status"></span> <span id="file"></span> <span id="total_volume"></span></span></div>
         <div><span>
                 <div class="progress">
                     <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" id="progress-bar"><span id="percent_complete"></span></progress></div>
@@ -68,24 +71,24 @@
                 <table class="table">
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col">layers</th>
+                            <th class="lead" scope="col">layers</th>
                             <td> <span><span id="current_layer"></span>/<span id="total_layers"></span></span> </td>
 
                         </tr>
                         <tr>
-                            <th scope="col">layer height</th>
+                            <th class="lead" scope="col">layer height</th>
                             <td id="layer_height"></td>
 
                         </tr>
                         <tr>
 
-                            <th scope="col">remaining</th>
+                            <th class="lead" scope="col">remaining</th>
                             <td id="seconds_remaining"></td>
 
                         </tr>
                         <tr>
 
-                            <th scope="col">elapsed</th>
+                            <th class="lead" scope="col">elapsed</th>
                             <td id="elapsed"></td>
 
                         </tr>
@@ -99,12 +102,12 @@
             </div>
         </div>
     </div>
-    
+
 
 
 
     <div id='window1' class='window'>
-        <div id="box1" class='title'>camera feed</div>
+        <div id="box1" class='title'><span  class="lead">Live Feed</span></div>
         <img id="camerabox" src=http://192.168.1.251:8080/?action=stream&1647305721063 alt="Your browser may be blocking insecure content on a secure page.  You can allow insecure content, or disable the camera." />
 
     </div>
@@ -124,8 +127,8 @@
     print "const camera=\"" . $config['MONO_X_CAMERA'] . "\";\n";
     print "const usecamera=\"" . $config['MONO_X_USE_CAMERA'] . "\";\n";
     ?>
-    if (usecamera != "true" && usecamera != "1"){
-        document.getElementById("window1").hidden=true;
+    if (usecamera != "true" && usecamera != "1") {
+        document.getElementById("window1").hidden = true;
 
     }
     document.getElementById("camerabox").setAttribute("src", camera);

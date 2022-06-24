@@ -17,5 +17,24 @@
     width: 50%;
     height: 50%;
 }
+.header-image{
+    height:  5em;
+    vertical-align: middle;
+    position: relative;
+
+}
+.heading-box{
+    max-height: 5em;
+}
+.header-title{
+    max-height: 3em;
+
+    margin: 0;
+}
+.header-text{
+    max-height: 2em;
+    margin: 0;
+}
+
 
 

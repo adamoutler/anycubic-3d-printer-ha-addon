@@ -57,7 +57,6 @@ while (!endsWith($data, "end") && !endsWith($data,"\n\n") && time() < $endtime) 
 }
 $data = trim($data);
 set_time_limit(30);
-
 fclose($socket);
 $array = explode(",", $data);
 
