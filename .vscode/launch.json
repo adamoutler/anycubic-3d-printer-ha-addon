@@ -24,7 +24,7 @@
       "env": { "QUERY_STRING": "" },
       "port": 9000
       
-    }
+    },
     {
       "name": "Launch stored image",
       "type": "php",
