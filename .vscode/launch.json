@@ -1,9 +1,6 @@
 {
   "version": "0.2.0",
   "configurations": [
-
-
-
     {
       "name": "Launch application",
       "type": "php",
@@ -36,7 +33,6 @@
       "cwd": "/workspaces/anycubic-3d-printer-ha-addon/src",
       "env": { "QUERY_STRING": "" },
       "port": 9000
-      
     }
   ]
 }
