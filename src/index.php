@@ -120,13 +120,13 @@
 </script>
 <script>
     <?php
-    $config = [];
-    include_once('config.inc.php');
-    print "const ip=\"" . $config['MONO_X_IP'] . "\";\n";
-    print "const port=\"" . $config['MONO_X_PORT'] . "\";\n";
-    print "const camera=\"" . $config['MONO_X_CAMERA'] . "\";\n";
-    print "const usecamera=\"" . $config['MONO_X_USE_CAMERA'] . "\";\n";
-    ?>
+$config = [];
+include_once 'config.inc.php';
+print "const ip=\"" . $config['MONO_X_IP'] . "\";\n";
+print "const port=\"" . $config['MONO_X_PORT'] . "\";\n";
+print "const camera=\"" . $config['MONO_X_CAMERA'] . "\";\n";
+print "const usecamera=\"" . $config['MONO_X_USE_CAMERA'] . "\";\n";
+?>
     if (usecamera != "true" && usecamera != "1") {
         document.getElementById("window1").hidden = true;
 

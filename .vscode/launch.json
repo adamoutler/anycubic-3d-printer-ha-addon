@@ -24,7 +24,17 @@
       "request": "launch",
       "program": "${file}",
       "cwd": "${fileDirname}",
-      "env": { "QUERY_STRING": "server=192.168.1.254&port=6000&cmd=getPreview2,129.pwmb,end" },
+      "env": { "QUERY_STRING": "" },
+      "port": 9000
+      
+    }
+    {
+      "name": "Launch stored image",
+      "type": "php",
+      "request": "launch",
+      "program": "/workspaces/anycubic-3d-printer-ha-addon/src/getImage.php",
+      "cwd": "/workspaces/anycubic-3d-printer-ha-addon/src",
+      "env": { "QUERY_STRING": "" },
       "port": 9000
       
     }
