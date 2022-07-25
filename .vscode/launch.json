@@ -32,6 +32,16 @@
       "cwd": "/workspaces/anycubic-3d-printer-ha-addon/src",
       "env": { "QUERY_STRING": "" },
       "port": 9000
+    },
+
+    {
+      "name": "get status",
+      "type": "php",
+      "request": "launch",
+      "program": "/workspaces/anycubic-3d-printer-ha-addon/src/api.php",
+      "cwd": "/workspaces/anycubic-3d-printer-ha-addon/src",
+      "env": { "QUERY_STRING": "command=getstatus&debug=true" },
+      "port": 9000
     }
   ]
 }

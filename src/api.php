@@ -2,7 +2,7 @@
 
 /* global lock file for API use prevents multiple API calls at the same time */
 $LOCKFILE = fopen(sys_get_temp_dir() . '/monox-api', 'w');
-
+$DEBUG=false;
 /**
  * Apply a lock so that other components will not be able to interfere.
  */
@@ -39,7 +39,11 @@ if (!isset($_GET["port"])) {
 if (!isset($_GET["cmd"])) {
     $_GET["cmd"] = "getstatus";
 }
+if (isset($_GET["debug"])){
+    $DEBUG=$_GET["debug"];
+}
 
+$start_time = time();
 $socket = fsockopen($_GET["server"], $_GET["port"]);
 if (!defined('STDIN')) {
     define('STDIN', fopen("php://stdin", "r"));
@@ -49,6 +53,7 @@ if (!$socket) {
     return;
 }
 lockAPI();
+
 stream_set_blocking($socket, 0);
 stream_set_blocking(STDIN, 0);
 if (endsWith($_GET["cmd"], ",end")) {
@@ -64,7 +69,6 @@ if (!is_resource($socket)) {
 
 $write = NULL;
 $except = NULL;
-sleep(1);
 @stream_select($read, $write, $except, null);
 
 $data = "";
@@ -84,13 +88,16 @@ function endsWith($haystack, $needle) {
 }
 set_time_limit(15);
 $endtime = time() + 15;
-while (!endsWith($data, "end") && !endsWith($data, "\n\n") && time() < $endtime) {
-    $data = fread($socket, 8192);
+while (!endsWith($data, ",end") && !endsWith($data, "\n\n") && time() < $endtime) {
+    $data .= fread($socket, 1);
 }
 $data = trim($data);
 set_time_limit(30);
 fclose($socket);
 unlockAPI();
+if ($DEBUG){
+    echo "Response time: ". (time()-$start_time)."\n";
+}
 $array = explode(",", $data);
 
 $newarray = (array)null;
