@@ -3,6 +3,7 @@
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link href="css/style.css" rel="stylesheet">
+    <link rel="shortcut icon" href="img/32x32.webp" type="image/webp" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
@@ -127,7 +128,7 @@ print "const port=\"" . $config['MONO_X_PORT'] . "\";\n";
 print "const camera=\"" . $config['MONO_X_CAMERA'] . "\";\n";
 print "const usecamera=\"" . $config['MONO_X_USE_CAMERA'] . "\";\n";
 ?>
-    if (usecamera != "true" && usecamera != "1") {
+    if (usecamera.toLowerCase() != "true" && usecamera != "1") {
         document.getElementById("window1").hidden = true;
 
     }
