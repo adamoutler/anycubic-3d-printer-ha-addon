@@ -128,7 +128,6 @@ function action(ele) {
 }
 
 function mergeState(newstates) {
-
   for (key in newstates) {
     state[key] = newstates[key];
   }
@@ -234,7 +233,7 @@ async function doTenSecondRefresh() {
     getSysInfo();
   }
   await sleep(1000);
-  if (!state.files){
+  if (!state.files) {
     refreshFiles();
   }
   await sleep(1000);
