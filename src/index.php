@@ -21,7 +21,7 @@
         <div class="toast-body">
         </div>
     </div>
-    <div class="position-static heading-box">
+    <div id="header" class="position-static heading-box">
         <row class="d-inline-flex ">
             <img class="header-image" src="img/anycubic.jpg" />
             <div class="d-flex-column">

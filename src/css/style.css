@@ -28,7 +28,6 @@
 }
 .header-title{
     max-height: 3em;
-
     margin: 0;
 }
 .header-text{
@@ -36,5 +35,6 @@
     margin: 0;
 }
 
-
-
+#header {
+    margin-bottom: .5em;
+}
