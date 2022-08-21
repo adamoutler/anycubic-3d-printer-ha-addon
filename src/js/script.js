@@ -3,7 +3,7 @@ selectedFileName = "";
 secondsRemaining = 0;
 secondsElapsed = 0;
 state = {};
-layerUpdate=false;
+layerUpdate = false;
 
 function onSelect(item) {
   selectedFileName = item.selectedOptions[0].innerHTML;
@@ -72,11 +72,11 @@ var callback = function handleResults(err, data) {
                 updateItem[key] +
                 "% complete </span>";
             }
-          } else if (layerUpdate&& key == "seconds_remaining") {
+          } else if (layerUpdate && key == "seconds_remaining") {
             secondsRemaining = updateItem[key];
-          } else if (layerUpdate&& key == "elapsed") {
+          } else if (layerUpdate && key == "elapsed") {
             secondsElapsed = updateItem[key];
-            layerUpdate=false
+            layerUpdate = false;
           } else {
             ele = document.getElementById(key);
             if (ele != null) ele.innerHTML = updateItem[key];
@@ -128,8 +128,9 @@ function action(ele) {
 }
 
 function mergeState(newstates) {
-  if (newstates.sysinfo){
-    console.log("foo");c
+  if (newstates.sysinfo) {
+    console.log("foo");
+    c;
   }
   for (key in newstates) {
     state[key] = newstates[key];
