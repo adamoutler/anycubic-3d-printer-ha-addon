@@ -232,9 +232,9 @@ function sleep(ms) {
 
 async function doTenSecondRefresh() {
   getSysInfo();
-  await sleep(1000)
+  await sleep(1000);
   getStatus();
-  await sleep(1000)
+  await sleep(1000);
   refreshFiles();
   await sleep(6000);
 
