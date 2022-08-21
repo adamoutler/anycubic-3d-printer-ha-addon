@@ -1,4 +1,5 @@
 ---
+
 | Version  | Change                                   |
 | -------- | ---------------------------------------- |
 | **5**    | Optimize data collection, faster startup |
