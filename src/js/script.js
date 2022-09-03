@@ -23,6 +23,8 @@ function removeOptions(selectElement) {
 }
 
 var callback = function handleResults(err, data) {
+  fadeInOffline(data);
+  progbar = document.getElementById("progress-bar");
   mergeState(data);
   if (err !== null) {
     alert("Something went wrong: " + err);
@@ -176,8 +178,17 @@ function enablePause(value) {
 function enableStop(value) {
   enableButton("stop", value);
 }
+
+function fadeInOffline(item){
+  action=document.getElementById("lastaction")
+  item[action.textContent=Object.keys(item)[1]];
+  offline=document.getElementById("offline")
+  offline.classList.remove("fade-in-div")
+  offline.parentNode.replaceChild(offline,offline)
+  offline.classList.add("fade-in-div")
+  
+}
 function manageStates(item) {
-  progbar = document.getElementById("progress-bar");
   switch (item.status) {
     case "print":
       enablePrint(false);

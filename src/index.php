@@ -113,6 +113,15 @@
 
     </div>
     </div>
+
+    <div style="position: absolute;" ><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span id=lastaction>dfasdftest</span></div>
+    <div style="position: absolute;">🟢</div>
+    <div style="position: absolute;" id="offline">🔴</div>
+    <div class="text p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    
+           
+            
+    </div>
 </body>
 
 <script>

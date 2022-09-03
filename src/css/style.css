@@ -34,7 +34,13 @@
     max-height: 2em;
     margin: 0;
 }
-
 #header {
     margin-bottom: .5em;
+}
+.fade-in-div { 
+    animation: fadeIn 40s; 
+}
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
 }
