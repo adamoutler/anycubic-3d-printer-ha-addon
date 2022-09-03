@@ -179,14 +179,13 @@ function enableStop(value) {
   enableButton("stop", value);
 }
 
-function fadeInOffline(item){
-  action=document.getElementById("lastaction")
-  item[action.textContent=Object.keys(item)[1]];
-  offline=document.getElementById("offline")
-  offline.classList.remove("fade-in-div")
-  offline.parentNode.replaceChild(offline,offline)
-  offline.classList.add("fade-in-div")
-  
+function fadeInOffline(item) {
+  action = document.getElementById("lastaction");
+  item[(action.textContent = Object.keys(item)[1])];
+  offline = document.getElementById("offline");
+  offline.classList.remove("fade-in-div");
+  offline.parentNode.replaceChild(offline, offline);
+  offline.classList.add("fade-in-div");
 }
 function manageStates(item) {
   switch (item.status) {
