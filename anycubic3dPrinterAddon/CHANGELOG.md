@@ -1,7 +1,7 @@
 ---
 
 | Version  | Change                                         |
-| -------- | ---------------------------------------------  |
+| -------- | ---------------------------------------------- |
 | **6**    | Add status indicator to signal when connected. |
 | **5**    | Optimize data collection, faster startup       |
 | **4**    | address timer rubber banding issue             |
