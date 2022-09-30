@@ -3,7 +3,7 @@ selectedFileName = "";
 secondsRemaining = 0;
 secondsElapsed = 0;
 state = {};
-lastLayer="";
+lastLayer = "";
 layerUpdate = false;
 
 function onSelect(item) {
@@ -53,15 +53,17 @@ var callback = function handleResults(err, data) {
       }
       if (item == "status" || "sysinfo") {
         this.updateItem = data[item];
-        
-        if (item == "status" && (cur_layer=this.updateItem["current_layer"])!=null ){
-          if(this.lastLayer != cur_layer){
-            this.layerUpdate=true;
-            lastLayer=cur_layer;
+
+        if (
+          item == "status" &&
+          (cur_layer = this.updateItem["current_layer"]) != null
+        ) {
+          if (this.lastLayer != cur_layer) {
+            this.layerUpdate = true;
+            lastLayer = cur_layer;
           }
         }
         for (key in updateItem) {
-
           if (key == "status") manageStates(data[item]);
           if (key == "file") {
             updateItem.internalName = updateItem[key].pop();
@@ -87,7 +89,7 @@ var callback = function handleResults(err, data) {
             secondsRemaining = updateItem[key];
           } else if (layerUpdate && key == "elapsed") {
             secondsElapsed = updateItem[key];
-          } else if (key == "elapsed"||key=="seconds_remaining"){
+          } else if (key == "elapsed" || key == "seconds_remaining") {
             //do nothing
           } else {
             ele = document.getElementById(key);
@@ -192,7 +194,7 @@ function enableStop(value) {
 
 function fadeInOffline(item) {
   action = document.getElementById("lastaction");
-  if (item==null){
+  if (item == null) {
     return;
   }
   item[(action.textContent = Object.keys(item)[1])];
@@ -291,7 +293,7 @@ async function doTimerUpdates() {
 }
 getStatus();
 window.onload = (event) => {
-  console.log('page is fully loaded');
+  console.log("page is fully loaded");
 };
 executeAsync(doTenSecondRefresh);
 executeAsync(doTimerUpdates);
