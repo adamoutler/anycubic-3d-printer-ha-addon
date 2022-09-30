@@ -3,6 +3,7 @@ selectedFileName = "";
 secondsRemaining = 0;
 secondsElapsed = 0;
 state = {};
+lastLayer="";
 layerUpdate = false;
 
 function onSelect(item) {
@@ -52,7 +53,15 @@ var callback = function handleResults(err, data) {
       }
       if (item == "status" || "sysinfo") {
         this.updateItem = data[item];
+        
+        if (item == "status" && (cur_layer=this.updateItem["current_layer"])!=null ){
+          if(this.lastLayer != cur_layer){
+            this.layerUpdate=true;
+            lastLayer=cur_layer;
+          }
+        }
         for (key in updateItem) {
+
           if (key == "status") manageStates(data[item]);
           if (key == "file") {
             updateItem.internalName = updateItem[key].pop();
@@ -78,7 +87,8 @@ var callback = function handleResults(err, data) {
             secondsRemaining = updateItem[key];
           } else if (layerUpdate && key == "elapsed") {
             secondsElapsed = updateItem[key];
-            layerUpdate = false;
+          } else if (key == "elapsed"||key=="seconds_remaining"){
+            //do nothing
           } else {
             ele = document.getElementById(key);
             if (ele != null) ele.innerHTML = updateItem[key];
@@ -86,6 +96,7 @@ var callback = function handleResults(err, data) {
         }
       }
     }
+    layerUpdate = false;
   }
 };
 
@@ -181,6 +192,9 @@ function enableStop(value) {
 
 function fadeInOffline(item) {
   action = document.getElementById("lastaction");
+  if (item==null){
+    return;
+  }
   item[(action.textContent = Object.keys(item)[1])];
   offline = document.getElementById("offline");
   offline.classList.remove("fade-in-div");
@@ -276,6 +290,8 @@ async function doTimerUpdates() {
   executeAsync(doTimerUpdates);
 }
 getStatus();
-
+window.onload = (event) => {
+  console.log('page is fully loaded');
+};
 executeAsync(doTenSecondRefresh);
 executeAsync(doTimerUpdates);
