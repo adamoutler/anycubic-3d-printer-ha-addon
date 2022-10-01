@@ -1,27 +1,65 @@
 <?php
 
 /* global lock file for API use prevents multiple API calls at the same time */
-$LOCKFILE = fopen(sys_get_temp_dir() . '/monox-api', 'w');
+$LOCKFILE = sys_get_temp_dir() . '/monox-api';
 $DEBUG=false;
+set_time_limit(4);
+
 /**
  * Apply a lock so that other components will not be able to interfere.
  */
 function lockAPI() {
     global $LOCKFILE;
-    $mylock = $LOCKFILE;
-    while (!flock($mylock,  LOCK_EX | LOCK_NB , $would_block)) {
-        usleep(500000); //sleep 1/2 second.
-        $mylock= fopen(sys_get_temp_dir() . '/monox-api', 'w');
+
+    $contents = readLockFile();
+
+    while (strlen($contents) > 1){
+        $contents = readLockFile();
+        if (time()-$contents > 15){
+            unlockAPI();
+            break;
+        }
+        if (strlen($contents) <=1){
+            break;
+        }
     }
+    $handle = fopen($LOCKFILE, "w");
+
+    fwrite($handle, time());
+    fclose( $handle);
     register_shutdown_function('unlockAPI');
-    $LOCKFILE = $mylock;
+
+    
+    
 }
+function readLockFile(){
+    global $LOCKFILE;
+    $handle = fopen($LOCKFILE, "r");
+    while (!$handle){
+        $handle = fopen($LOCKFILE, "r");
+    }
+    if (filesize($LOCKFILE)==0){
+        fclose($handle);
+        return 0;
+    }
+    $contents = fread($handle, filesize($LOCKFILE));
+    fclose($handle);
+    return $contents;
+}
+
 /**
  * Unlock the API, allowing others to talk to the API.
  */
 function unlockAPI() {
     global $LOCKFILE;
-    flock($LOCKFILE, LOCK_UN);
+    $mylock= fopen( $LOCKFILE, "w");
+    while (!$mylock){
+        $mylock= fopen( $LOCKFILE, "x+");
+    }
+    fwrite($mylock, 0);
+    fclose($mylock);
+
+    
 }
 
 function __destruct() {
@@ -86,7 +124,6 @@ function endsWith($haystack, $needle) {
     }
     return substr($haystack, -$length) === $needle;
 }
-set_time_limit(15);
 $endtime = time() + 15;
 while (!endsWith($data, ",end") && !endsWith($data, "\n\n") && time() < $endtime) {
     $data .= fread($socket, 1);
