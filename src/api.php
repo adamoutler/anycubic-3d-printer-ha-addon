@@ -12,30 +12,31 @@ function lockAPI() {
     global $LOCKFILE;
 
     $contents = readLockFile();
-
-    while (strlen($contents) > 1){
+    while (strlen($contents) > 1){  // While the lock is present
         $contents = readLockFile();
-        if (time()-$contents > 15){
+        if (strlen($contents) <=1){  // If lock becomes unlocked, proceed
+            break;
+        }
+        if (time()-$contents > 15){ // If time exceeds 15 seconds unlock and proceed
             unlockAPI();
             break;
         }
-        if (strlen($contents) <=1){
-            break;
-        }
+        sleep(1);                    // Otherwise sleep for a second and try again
     }
-    $handle = fopen($LOCKFILE, "w");
-
-    fwrite($handle, time());
-    fclose( $handle);
+    writeLockFile(time());
     register_shutdown_function('unlockAPI');
-
-    
-    
 }
+
+/**
+ * Read the lock file and return the contents
+ */
 function readLockFile(){
     global $LOCKFILE;
+    if (! file_exists($LOCKFILE)){
+        return 0;
+    }
     $handle = fopen($LOCKFILE, "r");
-    while (!$handle){
+    while (!$handle){  //keep trying until we can get a lock on the file.
         $handle = fopen($LOCKFILE, "r");
     }
     if (filesize($LOCKFILE)==0){
@@ -47,24 +48,30 @@ function readLockFile(){
     return $contents;
 }
 
+function writeLockFile(string $value){
+    global $LOCKFILE;
+    $mylock= fopen( $LOCKFILE, "w");
+    while (!$mylock){
+        $mylock= fopen( $LOCKFILE, "w");
+    }
+    fwrite($mylock, $value);
+    fclose($mylock);
+}
+
 /**
  * Unlock the API, allowing others to talk to the API.
  */
 function unlockAPI() {
-    global $LOCKFILE;
-    $mylock= fopen( $LOCKFILE, "w");
-    while (!$mylock){
-        $mylock= fopen( $LOCKFILE, "x+");
-    }
-    fwrite($mylock, 0);
-    fclose($mylock);
-
+    writeLockFile(0);
     
 }
 
 function __destruct() {
     unlockAPI();
     echo 'Destruct: ' . __METHOD__ . '()' . PHP_EOL;
+}
+if ($_SERVER['QUERY_STRING']==NULL ){
+    return;
 }
 parse_str($_SERVER['QUERY_STRING'], $_GET);
 /* debug*/
