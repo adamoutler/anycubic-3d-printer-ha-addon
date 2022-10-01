@@ -2,18 +2,18 @@
 namespace anycubic;
 include 'AnycubicImage.php';
 include 'api.php';
-
 use anycubic\AnycubicImage as AnycubicImage;
 
+
+$DEBUG=false;
 /* global lock file for API use prevents multiple API calls at the same time */
-$LOCKFILE = fopen(sys_get_temp_dir() . '/monox-api', 'w');
 
 /**
  * parse query string or handle input from
  */
 function getCommands() {
     $server = $_GET["server"] ?? "192.168.1.254";
-    $filename = $_GET["file"] ?? "3.pwmb";
+    $filename = $_GET["file"] ?? "1.pwmb";
     $port = $_GET["port"] ?? 6000;
     $file = preg_replace("/[^a-zA-Z0-9.]+/", "", trim(explode(",", $filename)[0]));
     $address = preg_replace("/[^a-zA-Z0-9.]+/", "", gethostbyname($server));
@@ -32,7 +32,10 @@ function getCommands() {
  * @return Image an image object representing the image and metadata.
  */
 function getImageFromPrinter($address, $port, $file) {
+    global $DEBUG;
     lockAPI();
+    ini_set('max_execution_time', '20');
+
     //SOL_UDP
     $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP) or die("Could not create socket\n");
     socket_setopt($socket, SOL_SOCKET, SO_RCVTIMEO, array('sec' => 1, 'usec' => 500000));
@@ -41,12 +44,14 @@ function getImageFromPrinter($address, $port, $file) {
     socket_write($socket, $preview1, strlen($preview1)) or die("Could not send data to server\n");
     $image_metadata = socket_read($socket, 32) or die("Could not read server response\n");
     $image = new AnycubicImage($image_metadata);
-    print("read metadata from " . ($image->getFilename()) . "\n");
+    if ($DEBUG){
+        print("read metadata from " . ($image->getFilename()) . "\n");
+    }
     while (($currentByte = socket_read($socket, 1)) != "") {
         // Empty the buffer
     }
     $preview2 = getPreviewCmd(2, $file);
-    socket_set_option($socket, SOL_SOCKET, SO_RCVTIMEO, array('sec' => 1, 'usec' => 10));
+    socket_set_option($socket, SOL_SOCKET, SO_RCVTIMEO, array('sec' => 4, 'usec' => 10));
     socket_set_option($socket, SOL_SOCKET, SO_RCVBUF, $image->getExpectedBytes());
     $end_time = microtime(true) + (15 * 100000);
     $image_contents = "";
@@ -58,9 +63,11 @@ function getImageFromPrinter($address, $port, $file) {
 
     $image->setContents($image_contents);
     unlockAPI();
-    echo "Expected bytes:" . ($image->getExpectedBytes());
-    echo "Actual bytes:" . (strlen($image->getContents()));
-    print("Valid Image: " . ($image->isValid() == 0 ? "true" : "false") . "\n");
+    if ($DEBUG){
+        echo "Expected bytes:" . ($image->getExpectedBytes());
+        echo "Actual bytes:" . (strlen($image->getContents()));
+        print("Valid Image: " . ($image->isValid() == 0 ? "true" : "false") . "\n");
+    }
     return $image;
 }
 
@@ -73,10 +80,30 @@ function getPreviewCmd(int $number, String $file) {
 }
 
 [$address, $port, $file] = getCommands();
+$filename="img/".$file.".png";
+if (file_exists($filename)){
+    echo $filename;
+    return;
+}
+
 $image = getImageFromPrinter($address, $port, $file);
 file_put_contents('store', $image->serialize());
 
 $image = AnycubicImage::unSerialize(file_get_contents('store'));
 
-ImagePNG($image->getImage(), 'img/' . $image->getFilename() . '.png');
-echo "wrote img/'".$image->getFilename();
+$file= $filename;
+
+
+
+
+ImagePNG($image->getImage(), $file);
+
+$handle = fopen($file, "r");
+while (!$handle){
+    $handle = fopen($file, "r");
+}
+
+$contents = fread($handle, filesize($LOCKFILE));
+fclose($handle); 
+
+print $file; 

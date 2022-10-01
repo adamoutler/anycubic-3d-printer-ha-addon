@@ -4,7 +4,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link href="css/style.css" rel="stylesheet">
     <link rel="shortcut icon" href="img/32x32.webp" type="image/webp" />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -26,8 +25,17 @@
         <row class="d-inline-flex ">
             <img class="header-image" src="img/anycubic.jpg" />
             <div class="d-flex-column">
-                <p class="header-title align-bottom display-5" id="model"> Anycubic </p>
-                <p class="header-text align-bottom lead" id="firmware"></p>
+                <span>
+                    <span class="header-title align-bottom display-5" id="model"> Anycubic </span>
+                    <span>
+                        on
+                        <span class="header-text align-bottom lead" id="wifi"></span>
+                    </span>
+                </span>
+                <div>
+                    <span class="header-text align-bottom lead" id="firmware"></span>
+                    
+                </div>
             </div>
         </row>
 
@@ -40,7 +48,7 @@
             </span>
         </div>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-sm">
                 <button type="button" onclick="action(this)" id='print' class="btn btn-success">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play" viewBox="0 0 16 16">
                         <path d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z">
@@ -67,8 +75,11 @@
                     </select>
                 </div>
             </div>
+            <div class="col-sm">
+                <img id="activeImage"></img>
+            </div>
 
-            <div class="col-md-4 text-center">
+            <div class="col-sm text-center">
                 <table class="table">
                     <thead class="thead-dark">
                         <tr>
@@ -114,21 +125,18 @@
     </div>
     </div>
 
-    <div style="position: absolute;" ><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span id=lastaction>idle</span></div>
-    <div style="position: absolute;">🟢</div>
-    <div style="position: absolute;" id="offline">🔴</div>
+    <div style="position: absolute;" id="online">🟢<span id=lastaction>connecting...</span></div>
+    <span style="position: absolute;" id="offline">🔴</span>
     <div class="text p-3" style="background-color: rgba(0, 0, 0, 0.2);">
     
            
             
     </div>
 </body>
+<script async src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script async src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<script>
-
-
-</script>
-<script>
+<script async defer>
     <?php
 $config = [];
 include_once 'config.inc.php';
@@ -140,10 +148,9 @@ print "const usecamera=\"" . $config['MONO_X_USE_CAMERA'] . "\";\n";
     if (usecamera.toLowerCase() != "true" && usecamera != "1") {
         document.getElementById("window1").hidden = true;
 
+        document.getElementById("camerabox").setAttribute("src", camera);
     }
-    document.getElementById("camerabox").setAttribute("src", camera);
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-<script src="js/script.js"></script>
-<script src="js/ui.js"></script>
+<script async src="js/script.js"></script>
+<script async src="js/ui.js"></script>

@@ -3,16 +3,24 @@ selectedFileName = "";
 secondsRemaining = 0;
 secondsElapsed = 0;
 state = {};
-lastLayer = "";
+lastLayer="";
 layerUpdate = false;
 
 function onSelect(item) {
   selectedFileName = item.selectedOptions[0].innerHTML;
   selectedFile = item.value;
   document.getElementById("selected").innerHTML = this.selectedFileName;
-  doApiCall("getPreview2," + "60.pwmb" + ",end", function (err, data) {
+  doImageCall(selectedFile , function (err, data) {
+    if (data==null){
+      return;
+    }
+    value=data.replace(/([^w]*)}/g,"")
+    if (value==null|| !value.includes(".png")){
+      return
+    }
+    document.getElementById("activeImage").setAttribute("src",value);
     //do stuff here.
-  });
+ });
 }
 
 function removeOptions(selectElement) {
@@ -53,17 +61,15 @@ var callback = function handleResults(err, data) {
       }
       if (item == "status" || "sysinfo") {
         this.updateItem = data[item];
-
-        if (
-          item == "status" &&
-          (cur_layer = this.updateItem["current_layer"]) != null
-        ) {
-          if (this.lastLayer != cur_layer) {
-            this.layerUpdate = true;
-            lastLayer = cur_layer;
+        
+        if (item == "status" && (cur_layer=this.updateItem["current_layer"])!=null ){
+          if(this.lastLayer != cur_layer){
+            this.layerUpdate=true;
+            lastLayer=cur_layer;
           }
         }
         for (key in updateItem) {
+
           if (key == "status") manageStates(data[item]);
           if (key == "file") {
             updateItem.internalName = updateItem[key].pop();
@@ -89,7 +95,7 @@ var callback = function handleResults(err, data) {
             secondsRemaining = updateItem[key];
           } else if (layerUpdate && key == "elapsed") {
             secondsElapsed = updateItem[key];
-          } else if (key == "elapsed" || key == "seconds_remaining") {
+          } else if (key == "elapsed"||key=="seconds_remaining"){
             //do nothing
           } else {
             ele = document.getElementById(key);
@@ -100,6 +106,26 @@ var callback = function handleResults(err, data) {
     }
     layerUpdate = false;
   }
+};
+
+
+var doImageCall = function (command, callback) {
+  var xhr = new XMLHttpRequest();
+  xhr.open(
+    "GET",
+    "getImage.php?server=" + ip + "&port=" + port + "&file=" + command,
+    true
+  );
+  xhr.responseType = "";
+  xhr.onload = function () {
+    var status = xhr.status;
+    if (status === 200) {
+      callback(null, xhr.response);
+    } else {
+      callback(status, xhr.response);
+    }
+  };
+  xhr.send();
 };
 
 var doApiCall = function (command, callback) {
@@ -194,7 +220,7 @@ function enableStop(value) {
 
 function fadeInOffline(item) {
   action = document.getElementById("lastaction");
-  if (item == null) {
+  if (item==null){
     return;
   }
   item[(action.textContent = Object.keys(item)[1])];
@@ -292,8 +318,6 @@ async function doTimerUpdates() {
   executeAsync(doTimerUpdates);
 }
 getStatus();
-window.onload = (event) => {
-  console.log("page is fully loaded");
-};
+
 executeAsync(doTenSecondRefresh);
 executeAsync(doTimerUpdates);
