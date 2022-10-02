@@ -87,10 +87,11 @@ if (file_exists($filename)){
 }
 
 $image = getImageFromPrinter($address, $port, $file);
-
 $file= $filename;
 
-
+if (! $image->isValid()){
+    $file=$file.".invalid.png";
+}
 
 
 ImagePNG($image->getImage(), $file);
