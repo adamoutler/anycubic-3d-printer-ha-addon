@@ -87,9 +87,6 @@ if (file_exists($filename)){
 }
 
 $image = getImageFromPrinter($address, $port, $file);
-file_put_contents('store', $image->serialize());
-
-$image = AnycubicImage::unSerialize(file_get_contents('store'));
 
 $file= $filename;
 
