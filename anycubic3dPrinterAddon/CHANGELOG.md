@@ -2,7 +2,7 @@
 
 | Version  | Change                                         |
 | -------- | ---------------------------------------------- |
-| **8a**   | Fix sync/lock issue.                           |
+| **8b**   | Fix sync/lock issue.                           |
 | **7**    | Fix initial status indicator message.          |
 | **6**    | Add status indicator to signal when connected. |
 | **5**    | Optimize data collection, faster startup       |

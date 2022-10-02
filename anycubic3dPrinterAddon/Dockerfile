@@ -21,7 +21,7 @@ RUN  /usr/bin/git pull && \
      cp -rf ./src/* /var/www/localhost/htdocs/ && \
      chown -R root:root /var/www/localhost/htdocs && \
      chmod -R 755 /var/www/localhost/htdocs && \
-     chmod -R 755 /var/www/localhost/htdocs/img && \
+     chmod -R 777 /var/www/localhost/htdocs/img && \
      chmod a+x /run.sh
 EXPOSE 80
 CMD [ "/run.sh" ]
