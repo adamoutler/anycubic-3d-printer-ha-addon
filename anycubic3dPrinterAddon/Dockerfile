@@ -22,7 +22,7 @@ RUN  /usr/bin/git pull && \
      chown -R root:root /var/www/localhost/htdocs && \
      chmod -R 755 /var/www/localhost/htdocs && \
      chmod -R 777 /var/www/localhost/htdocs/img && \
-     sed -i 's/;extension=sockets/extenaion=sockets/' /etc/php8/php.ini && \
+     sed -i 's/;extension=sockets/extension=sockets/' /etc/php8/php.ini && \
      chmod a+x /run.sh
 EXPOSE 80
 CMD [ "/run.sh" ]
