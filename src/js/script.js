@@ -158,7 +158,7 @@ var doApiCall = function (command, callback) {
   xhr.send();
 };
 
-function action(ele) {
+function doAction(ele) {
   var id = ele.id;
   switch (id) {
     case "print":
