@@ -2,7 +2,7 @@
 
 | Version  | Change                                         |
 | -------- | ---------------------------------------------- |
-| **10**   | Improve UI and alignment                       |
+| **10a**   | Improve UI and alignment                       |
 | **9**    | Add preview image support                      |
 | **8**    | Fix sync/lock issue.                           |
 | **7**    | Fix initial status indicator message.          |

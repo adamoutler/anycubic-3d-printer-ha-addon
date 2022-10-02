@@ -67,16 +67,15 @@ var callback = function handleResults(err, data) {
       }
       if (item == "status" || "sysinfo") {
         this.updateItem = data[item];
-
-        if (
-          item == "status" &&
-          (cur_layer = this.updateItem["current_layer"]) != null
-        ) {
-          if (this.lastLayer != cur_layer) {
-            this.layerUpdate = true;
-            lastLayer = cur_layer;
+        
+        if (item=="status"){
+          cur_layer=data["current_layer"]
+          if (this.lastLayer==null|| this.lastLayer != cur_layer) {
+          this.layerUpdate = true;
+          lastLayer = cur_layer;
           }
         }
+       
         for (key in updateItem) {
           switch (key) {
             case "file":
@@ -101,14 +100,17 @@ var callback = function handleResults(err, data) {
                   updateItem[key] +
                   "% complete </span>";
               }
+              break;
             case "seconds_remaining":
               if (this.layerUpdate) {
                 secondsRemaining = updateItem[key];
               }
+              break;
             case "elapsed":
               if (this.layerUpdate) {
                 secondsElapsed = updateItem[key];
               }
+              break;
             default:
               ele = document.getElementById(key);
               if (ele != null) ele.innerHTML = updateItem[key];
@@ -319,10 +321,11 @@ async function doTimerUpdates() {
     }
     if (secondsElapsed != null) {
       var date = new Date(null);
-      secondsElapsed++;
       date.setSeconds(secondsElapsed); // specify value for SECONDS here
+      secondsElapsed++;
       elapsedele = document.getElementById("elapsed");
-      elapsedele.innerHTML = date.toISOString().substring(11, 19);
+      curtime=date.toISOString().substring(11, 19)
+      elapsedele.innerHTML=curtime;
     }
   }
   await sleep(1000);
