@@ -27,14 +27,11 @@
             <div class="d-flex-column">
                 <span>
                     <span class="header-title align-bottom display-5" id="model"> Anycubic </span>
-                    <span>
-                        on
-                        <span class="header-text align-bottom lead" id="wifi"></span>
-                    </span>
                 </span>
                 <div>
                     <span class="header-text align-bottom lead" id="firmware"></span>
-                    
+                    on
+                    <span class="align-bottom" id="wifi">disconnected</span>
                 </div>
             </div>
         </row>
