@@ -12,6 +12,7 @@ function onSelect(item) {
   selectedFile = item.value;
   document.getElementById("selected").innerHTML = this.selectedFileName;
   doImageCall(selectedFile, function (err, data) {
+    document.getElementById("activeImage").setAttribute("src", "");
     if (data == null) {
       return;
     }
