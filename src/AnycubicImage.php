@@ -77,7 +77,7 @@ class AnycubicImage {
     public function setContents(String $contents) {
 
         $this->__string_contents = $contents;
-        $this->__valid_image = (strlen($this->__string_contents) / 2 > ($this->__width * $this->__height));
+        $this->__valid_image = (strlen($this->__string_contents) / 2+2 > ($this->__width * $this->__height));
         $int_array = unpack('S*', $contents);
         foreach ($int_array as $i) {
             array_push($this->__int_content, $i);
