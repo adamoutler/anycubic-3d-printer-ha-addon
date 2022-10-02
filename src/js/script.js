@@ -11,7 +11,7 @@ function onSelect(item) {
   selectedFileName = item.selectedOptions[0].innerHTML;
   selectedFile = item.value;
   document.getElementById("selected").innerHTML = this.selectedFileName;
-    doImageCall(selectedFile, function (err, data) {
+  doImageCall(selectedFile, function (err, data) {
     if (data == null) {
       return;
     }
