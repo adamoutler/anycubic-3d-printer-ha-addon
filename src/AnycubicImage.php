@@ -128,7 +128,9 @@ class AnycubicImage {
      * returns GdImage a standard image representation used for exporting.
      */
     public function getImage() {
-
+        if ($this->__width ==null || $this->__width<1){
+            exit();
+        }
         $byte_array = $this->__int_content;
         $im = imagecreatetruecolor($this->__width, $this->__height);
         $bla = imagecolorallocate($im, 0, 0, 0);

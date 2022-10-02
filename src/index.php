@@ -22,7 +22,7 @@
         </div>
     </div>
     <div id="header" class="position-static heading-box">
-        <row class="d-inline-flex ">
+        <row class="d-inline-flex">
             <img class="header-image" src="img/anycubic.jpg" />
             <div class="d-flex-column">
                 <span>
@@ -30,8 +30,7 @@
                 </span>
                 <div>
                     <span class="header-text align-bottom lead" id="firmware"></span>
-                    on
-                    <span class="align-bottom" id="wifi">disconnected</span>
+                    <span class="align-bottom" id="wifi"></span>
                 </div>
             </div>
         </row>
@@ -72,10 +71,11 @@
                     </select>
                 </div>
             </div>
-            <div class="col-sm">
-                <img id="activeImage"></img>
+            <div class="col-sm d-flex justify-content-sm-center">
+                <div><br>
+                    <img id="activeImage" style="max-height:180px;"></img>
+                </div>
             </div>
-
             <div class="col-sm text-center">
                 <table class="table">
                     <thead class="thead-dark">
@@ -121,10 +121,11 @@
 
     </div>
     </div>
-
-    <div style="position: absolute;" id="online">🟢<span id=lastaction>connecting...</span></div>
-    <span style="position: absolute;" id="offline">🔴</span>
-    <div class="text p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    <div style="z-index:100; position: relative;  bottom: 0; width: 100%; height: auto;">
+            <div style="position: absolute; bottom: 0;" id="online">🟢<span id=lastaction>connecting...</span></div>
+            <span style="position: absolute; bottom: 0;" id="offline">🔴</span>
+            <div class="text p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    </div>
     
            
             

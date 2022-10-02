@@ -1,13 +1,19 @@
 <?php
 namespace anycubic;
-include 'AnycubicImage.php';
-include 'api.php';
-use anycubic\AnycubicImage as AnycubicImage;
-
 
 $DEBUG=false;
 /* global lock file for API use prevents multiple API calls at the same time */
 
+
+//quick check at the start to determine if we already have the file.
+$filename="img/".$_GET["file"].".png";
+if (file_exists($filename)){
+    echo $filename;
+    return;
+}
+include 'AnycubicImage.php';
+include 'api.php';
+use anycubic\AnycubicImage as AnycubicImage;
 /**
  * parse query string or handle input from
  */
@@ -81,10 +87,7 @@ function getPreviewCmd(int $number, String $file) {
 
 [$address, $port, $file] = getCommands();
 $filename="img/".$file.".png";
-if (file_exists($filename)){
-    echo $filename;
-    return;
-}
+
 
 $image = getImageFromPrinter($address, $port, $file);
 $file= $filename;
