@@ -10,7 +10,8 @@ function onSelect(item) {
   document.getElementById("activeImage").setAttribute("src", "img/loading.gif");
   selectedFileName = item.selectedOptions[0].innerHTML;
   selectedFile = item.value;
-  document.getElementById("selected").innerHTML = "▶️ <strong>"+this.selectedFileName+"</strong>";
+  document.getElementById("selected").innerHTML =
+    "▶️ <strong>" + this.selectedFileName + "</strong>";
   doImageCall(selectedFile, function (err, data) {
     document.getElementById("activeImage").setAttribute("src", "");
     if (data == null) {
@@ -18,9 +19,9 @@ function onSelect(item) {
     }
     value = data.replace(/([^w]*)}/g, "");
     if (value == null || !value.includes(".png")) {
-     document.getElementById("activeImage").setAttribute("src", "");
-     document.getElementById("activeImage").setAttribute("alt", "❌🖼️");
-     
+      document.getElementById("activeImage").setAttribute("src", "");
+      document.getElementById("activeImage").setAttribute("alt", "❌🖼️");
+
       return;
     }
     document.getElementById("activeImage").setAttribute("src", value);
@@ -65,7 +66,6 @@ var callback = function handleResults(err, data) {
         continue;
       }
       if (item == "status" || "sysinfo") {
-
         this.updateItem = data[item];
 
         if (
@@ -78,40 +78,40 @@ var callback = function handleResults(err, data) {
           }
         }
         for (key in updateItem) {
-          switch (key){
-              case "file":
-                updateItem.internalName = updateItem[key].pop();
-                break;
-              case "monox":
-                continue;
-              case "status":
-                manageStates(data[item]);
-                break;
-              case "percent_complete":
-                ele = document.getElementById("progress-bar");
-                ele.setAttribute("aria-valuenow", updateItem[key]);
-                if (updateItem[key] < 10) {
-                  ele.setAttribute("style", "width: 5%");
-                } else {
-                  ele.setAttribute("style", "width: " + updateItem[key] + "%");
-                }
-                if (ele != null) {
-                  ele.innerHTML =
-                    '<span class="sr-only">' +
-                    updateItem[key] +
-                    "% complete </span>";
-                }
-              case "seconds_remaining":
-                if (this.layerUpdate){
-                  secondsRemaining = updateItem[key];
-                }
-              case "elapsed":
-                if (this.layerUpdate){
-                  secondsElapsed = updateItem[key];
-                }
-              default: 
-                ele = document.getElementById(key);
-                if (ele != null) ele.innerHTML = updateItem[key];
+          switch (key) {
+            case "file":
+              updateItem.internalName = updateItem[key].pop();
+              break;
+            case "monox":
+              continue;
+            case "status":
+              manageStates(data[item]);
+              break;
+            case "percent_complete":
+              ele = document.getElementById("progress-bar");
+              ele.setAttribute("aria-valuenow", updateItem[key]);
+              if (updateItem[key] < 10) {
+                ele.setAttribute("style", "width: 5%");
+              } else {
+                ele.setAttribute("style", "width: " + updateItem[key] + "%");
+              }
+              if (ele != null) {
+                ele.innerHTML =
+                  '<span class="sr-only">' +
+                  updateItem[key] +
+                  "% complete </span>";
+              }
+            case "seconds_remaining":
+              if (this.layerUpdate) {
+                secondsRemaining = updateItem[key];
+              }
+            case "elapsed":
+              if (this.layerUpdate) {
+                secondsElapsed = updateItem[key];
+              }
+            default:
+              ele = document.getElementById(key);
+              if (ele != null) ele.innerHTML = updateItem[key];
           }
         }
       }
