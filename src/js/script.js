@@ -123,7 +123,7 @@ var callback = function handleResults(err, data) {
   }
 };
 
-function updateItemByKey(data, key){
+function updateItemByKey(data, key) {
   ele = document.getElementById(key);
   if (ele != null) ele.innerHTML = data[key];
 }
