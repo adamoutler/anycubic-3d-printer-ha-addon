@@ -80,11 +80,13 @@ var callback = function handleResults(err, data) {
           switch (key) {
             case "file":
               updateItem.internalName = updateItem[key].pop();
+              updateItemByKey(updateItem, key);
               break;
             case "monox":
               continue;
             case "status":
               manageStates(data[item]);
+              updateItemByKey(updateItem, key);
               break;
             case "percent_complete":
               ele = document.getElementById("progress-bar");
@@ -112,8 +114,7 @@ var callback = function handleResults(err, data) {
               }
               break;
             default:
-              ele = document.getElementById(key);
-              if (ele != null) ele.innerHTML = updateItem[key];
+              updateItemByKey(updateItem, key);
           }
         }
       }
@@ -121,6 +122,11 @@ var callback = function handleResults(err, data) {
     layerUpdate = false;
   }
 };
+
+function updateItemByKey(data, key){
+  ele = document.getElementById(key);
+  if (ele != null) ele.innerHTML = data[key];
+}
 
 var doImageCall = function (command, callback) {
   var xhr = new XMLHttpRequest();
