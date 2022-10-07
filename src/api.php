@@ -203,6 +203,57 @@ while (sizeof($newarray) >= 1) {
         }
 
         break;
+    case ("getpara"):
+        $size = sizeof($newarray);
+        $output->param = (object)NULL;
+        $output->param->param = $newarray[1];
+        
+        if (startsWith($newarray[2], "end")) {
+            $newarray = remove_keys(count(array_keys((array)$output->status)), $newarray);
+            break;
+        }
+
+        switch (sizeof($newarray)){
+            case 20:
+            case 19:
+            case 18:
+            case 17:
+                $output->param->NormalLayer1RetractSpeedMMperSec = $newarray[8];
+            case 16:
+                $output->param->NormalLayer1RisingSpeedMMperSec = $newarray[7];
+            case 15:
+                $output->param->NormalLayer1RisingHeightMM = $newarray[9];
+            case 14:
+                $output->param->NormalLayer1RetractSpeedMMperSec = $newarray[8];
+            case 13:
+                $output->param->NormalLayer0RisingSpeedMMperSec = $newarray[7];
+            case 12:
+                $output->param->NormalLayer0RisingHeightMM = $newarray[6];
+            case 11:
+                $output->param->BottomLayer1RetractSpeedMMperSec = $newarray[8];
+            case 10:
+                $output->param->BottomLayer1RisingSpeedMMperSec = $newarray[7];
+            case 9:
+                $output->param->BottomLayer1RisingHeightMM = $newarray[9];
+            case 8:
+                $output->param->BottomLayer0RetractSpeedMMperSec = $newarray[8];
+            case 7:
+                $output->param->BottomLayer0RisingSpeedMMperSec = $newarray[7];
+            case 6:
+                $output->param->BottomLayer0RisingHeightMM = $newarray[6];
+            case 5:
+                $output->param->TransitionLayerCount = $newarray[5];
+            case 4:
+                $output->param->NormalExposureSeconds = $newarray[4];
+            case 3:
+                $output->param->BottomExposureSeconds = $newarray[3];
+            case 2:
+                $output->param->ExposureOffTime = $newarray[2];
+            case 1:
+                $output->param->BottomLayerCount = $newarray[1];
+                break;
+            }
+
     case ("getstatus"):
 
         $size = sizeof($newarray);
@@ -272,7 +323,7 @@ while (sizeof($newarray) >= 1) {
         }
         $newarray = (array)Null;
         break;
-    }
+    }    
 }
 
 echo json_encode($output);

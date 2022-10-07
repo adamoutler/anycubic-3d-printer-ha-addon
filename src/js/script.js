@@ -42,7 +42,8 @@ var callback = function handleResults(err, data) {
   progbar = document.getElementById("progress-bar");
   mergeState(data);
   if (err !== null) {
-    alert("Something went wrong: " + err);
+    action = document.getElementById("lastaction");
+    action.textContent = data + " " + err;
   } else {
     if (data == null) {
       return;
@@ -65,6 +66,10 @@ var callback = function handleResults(err, data) {
       if (item == "end") {
         continue;
       }
+      if (item == "param") {
+        console.info(item);
+        continue;
+      }
       if (item == "status" || "sysinfo") {
         this.updateItem = data[item];
 
@@ -79,7 +84,9 @@ var callback = function handleResults(err, data) {
         for (key in updateItem) {
           switch (key) {
             case "file":
-              updateItem.internalName = updateItem[key].pop();
+              if (Array.isArray(this.updateItem[key])) {
+                updateItem.internalName = updateItem[key].pop();
+              }
               updateItemByKey(updateItem, key);
               break;
             case "monox":
@@ -285,7 +292,9 @@ function refreshFiles() {
 function getStatus() {
   doApiCall("getstatus", callback);
 }
-
+function getParams() {
+  doApiCall("getpara", callback);
+}
 function getSysInfo() {
   doApiCall("sysinfo", callback);
 }
@@ -298,6 +307,7 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+printcount = 1;
 async function doTenSecondRefresh() {
   await sleep(1000);
   if (!state.sysinfo) {
@@ -309,6 +319,14 @@ async function doTenSecondRefresh() {
   }
   await sleep(1000);
   getStatus();
+  if (state.status != null && state.status.status == "print") {
+    await sleep(1000);
+    if (printcount <= 0) {
+      getParams();
+      printcount = 10;
+    }
+    printcount--;
+  }
   await sleep(6000);
 
   executeAsync(doTenSecondRefresh);
