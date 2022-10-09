@@ -68,6 +68,9 @@ var callback = function handleResults(err, data) {
       }
       if (item == "param") {
         console.info(item);
+        for (key in data[item]) {
+          updateItemByKey(data[item], key);
+        }
         continue;
       }
       if (item == "status" || "sysinfo") {
@@ -131,8 +134,12 @@ var callback = function handleResults(err, data) {
 };
 
 function updateItemByKey(data, key) {
-  ele = document.getElementById(key);
-  if (ele != null) ele.innerHTML = data[key];
+  try {
+    ele = document.getElementById(key);
+    if (ele != null) ele.textContent = data[key];
+  } catch (e) {
+    console.error(e + "while writing \"" + data[key] + " to " + key);
+  }
 }
 
 var doImageCall = function (command, callback) {
@@ -355,6 +362,7 @@ async function doTimerUpdates() {
   await sleep(1000);
   executeAsync(doTimerUpdates);
 }
+document.getElementById("cur").style.display = "table"
 getStatus();
 
 executeAsync(doTenSecondRefresh);

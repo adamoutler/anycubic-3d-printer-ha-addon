@@ -217,22 +217,23 @@ while (sizeof($newarray) >= 1) {
             case 20:
             case 19:
             case 18:
+                $output->param->NormalLayer1RetractSpeedMMperSec = $newarray[18];
             case 17:
-                $output->param->NormalLayer1RetractSpeedMMperSec = $newarray[8];
+                $output->param->NormalLayer1RisingSpeedMMperSec = $newarray[17];
             case 16:
-                $output->param->NormalLayer1RisingSpeedMMperSec = $newarray[7];
+                $output->param->NormalLayer1RisingHeightMM = $newarray[16];
             case 15:
-                $output->param->NormalLayer1RisingHeightMM = $newarray[9];
+                $output->param->NormalLayer1RetractSpeedMMperSec = $newarray[15];
             case 14:
-                $output->param->NormalLayer1RetractSpeedMMperSec = $newarray[8];
+                $output->param->NormalLayer0RisingSpeedMMperSec = $newarray[14];
             case 13:
-                $output->param->NormalLayer0RisingSpeedMMperSec = $newarray[7];
+                $output->param->NormalLayer0RisingHeightMM = $newarray[13];
             case 12:
-                $output->param->NormalLayer0RisingHeightMM = $newarray[6];
+                $output->param->NormalLayer0RetractSpeedMMperSec = $newarray[12];
             case 11:
-                $output->param->BottomLayer1RetractSpeedMMperSec = $newarray[8];
+                $output->param->BottomLayer1RetractSpeedMMperSec = $newarray[11];
             case 10:
-                $output->param->BottomLayer1RisingSpeedMMperSec = $newarray[7];
+                $output->param->BottomLayer1RisingSpeedMMperSec = $newarray[10];
             case 9:
                 $output->param->BottomLayer1RisingHeightMM = $newarray[9];
             case 8:

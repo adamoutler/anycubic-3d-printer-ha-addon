@@ -62,38 +62,115 @@
                     <img id="activeImage" style="max-height:180px;"></img>
                 </div>
             </div>
-            <div class="col-sm text-center">
-                <table class="table">
-                    <thead class="thead-dark">
+            <div class="col-sm text-center p-3 w-100">
+                <div class="tab">
+                    <button class="tablinks" onclick="openInfoTab(event, 'cur')">Current Info</button>
+                    <button class="tablinks" onclick="openInfoTab(event, 'current_params')">Current Parameters</button>
+                </div>
+                <div>
+                    <table id="current_params" class="table tabcontent ">
                         <tr>
-                            <th class="lead" scope="col">layers</th>
-                            <td> <span><span id="current_layer"></span>/<span id="total_layers"></span></span> </td>
-
+                            <th>Bottom Layer Count</th>
+                            <td id="BottomLayerCount"></td> <td>#</td>
                         </tr>
                         <tr>
-                            <th class="lead" scope="col">layer height</th>
-                            <td id="layer_height"></td>
-
+                            <th>Bottom Exposure</th>
+                            <td id="BottomExposureSeconds"></td><td>s</td>
                         </tr>
                         <tr>
-
-                            <th class="lead" scope="col">remaining</th>
-                            <td id="seconds_remaining"></td>
-
+                            <th>Off Time</th>
+                            <td id="ExposureOffTime"></td><td>s</td>
                         </tr>
                         <tr>
-
-                            <th class="lead" scope="col">elapsed</th>
-                            <td id="elapsed"></td>
-
+                            <th>Bottom Layer Rising Height</th>
+                            <td id="BottomLayer0RisingHeightMM"></td><td>mm</td>
                         </tr>
-                    </thead>
-                    <tbody>
                         <tr>
-
+                            <th>Bottom Layer Rising Speed</th>
+                            <td id="BottomLayer0RisingSpeedMMperSec"></td><td>mm/s</td>
                         </tr>
-                    <tbody>
-                </table>
+                        <tr>
+                            <th>Bottom layer Retract Speed</th>
+                            <td id="BottomLayer0RetractSpeedMMperSec"></td><td>mm/s</td>
+                        </tr>
+                        <tr>
+                            <th>Bottom Layer 2nd Rising Height</th>
+                            <td id="BottomLayer1RisingHeightMM"></td><td>mm</td>
+                        </tr>
+                        <tr>
+                            <th>Bottom Layer 2nd Rising Speed</th>
+                            <td id="BottomLayer1RisingSpeedMMperSec"></td><td>mm/s</td>
+                        </tr>
+                        <tr>
+                            <th>Bottom Layer 2nd Retract Speed</th>
+                            <td id="BottomLayer1RetractSpeedMMperSec"></td><td>mm/s</td>
+                        </tr>
+                        <tr>
+                            <th>Transition Layer Count</th>
+                            <td id="TransitionLayerCount"></td><td>#</td>
+                        </tr>
+                        <tr>
+                            <th>Normal Exposure Time</th>
+                            <td id="NormalExposureSeconds"></td><td>s</td>
+                        </tr>
+                        <tr>
+                            <th>Normal Layer Rising Height</th>
+                            <td id="NormalLayer0RisingHeightMM"></td><td>mm</td>
+                        </tr>
+                        <tr>
+                            <th>Normal Layer Rising Speed</th>
+                            <td id="NormalLayer0RisingSpeedMMperSec"></td><td>mm/s</td>
+                        </tr>
+                        <tr>
+                            <th>Normal Layer Retract Speed</th>
+                            <td id="NormalLayer0RetractSpeedMMperSec"></td><td>mm/s</td>
+                        </tr>
+                        <tr>
+                            <th>Normal Layer 2nd Rising Height</th>
+                            <td id="NormalLayer1RisingHeightMM"></td><td>mm</td>
+                        </tr>
+                        <tr>
+                            <th>Normal Layer 2nd Rising Speed</th>
+                            <td id="NormalLayer1RisingSpeedMMperSec"></td><td>mm/s</td>
+                        </tr>
+                        <tr>
+                            <th>Normal Layer 2nd Retract Speed</th>
+                            <td id="NormalLayer1RetractSpeedMMperSec"></td><td>mm/s</td>
+                        </tr>
+                    </table>
+                    <table id="history" class="table tabcontent "></table>
+                    <table id="cur" class="table tabcontent ">
+                        <thead class="thead-dark ">
+                            <tr>
+                                <th class="lead" scope="col">layers</th>
+                                <td> <span><span id="current_layer"></span>/<span id="total_layers"></span></span> </td>
+
+                            </tr>
+                            <tr>
+                                <th class="lead" scope="col">layer height</th>
+                                <td id="layer_height"></td>
+
+                            </tr>
+                            <tr>
+
+                                <th class="lead" scope="col">remaining</th>
+                                <td id="seconds_remaining"></td>
+
+                            </tr>
+                            <tr>
+
+                                <th class="lead" scope="col">elapsed</th>
+                                <td id="elapsed"></td>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+
+                            </tr>
+                        <tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -102,19 +179,19 @@
 
 
     <div id='window1' class='window'>
-        <div id="box1" class='title'><span  class="lead">Live Feed</span></div>
+        <div id="box1" class='title'><span class="lead">Live Feed</span></div>
         <img id="camerabox" src=http://192.168.1.251:8080/?action=stream&1647305721063 alt="Your browser may be blocking insecure content on a secure page.  You can allow insecure content, or disable the camera." />
 
     </div>
     </div>
     <div style="z-index:100; position: relative;  bottom: 0; width: 100%; height: auto;">
-            <div style="position: absolute; bottom: 0;" id="online">🟢<span id=lastaction>connecting...</span></div>
-            <span style="position: absolute; bottom: 0;" id="offline">🔴</span>
-            <div class="text p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-    </div>
-    
-           
-            
+        <div style="position: absolute; bottom: 0;" id="online">🟢<span id=lastaction>connecting...</span></div>
+        <span style="position: absolute; bottom: 0;" id="offline">🔴</span>
+        <div class="text p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        </div>
+
+
+
     </div>
 </body>
 <script async src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
@@ -122,13 +199,13 @@
 
 <script async defer>
     <?php
-$config = [];
-include_once 'config.inc.php';
-print "const ip=\"" . $config['MONO_X_IP'] . "\";\n";
-print "const port=\"" . $config['MONO_X_PORT'] . "\";\n";
-print "const camera=\"" . $config['MONO_X_CAMERA'] . "\";\n";
-print "const usecamera=\"" . $config['MONO_X_USE_CAMERA'] . "\";\n";
-?>
+    $config = [];
+    include_once 'config.inc.php';
+    print "const ip=\"" . $config['MONO_X_IP'] . "\";\n";
+    print "const port=\"" . $config['MONO_X_PORT'] . "\";\n";
+    print "const camera=\"" . $config['MONO_X_CAMERA'] . "\";\n";
+    print "const usecamera=\"" . $config['MONO_X_USE_CAMERA'] . "\";\n";
+    ?>
     if (usecamera.toLowerCase() != "true" && usecamera != "1") {
         document.getElementById("window1").hidden = true;
 

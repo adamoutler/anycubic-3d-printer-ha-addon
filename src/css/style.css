@@ -44,3 +44,31 @@
     0% { opacity: 0; }
     100% { opacity: 1; }
 }
+/* Style the buttons that are used to open the tab content */
+.tab button {
+    background-color: inherit;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+  }
+  
+.tabcontent {
+    display:  none;
+  }
+/* Style the buttons that are used to open the tab content */
+.tab button {
+    background-color: inherit;
+    transition: 0.3s;
+  }
+  
+  /* Change background color of buttons on hover */
+  .tab button:hover {
+    background-color: #ddd;
+  }
+  
+  /* Create an active/current tablink class */
+  .tab button.active {
+    background-color: #ccc;
+  }
