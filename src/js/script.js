@@ -138,7 +138,7 @@ function updateItemByKey(data, key) {
     ele = document.getElementById(key);
     if (ele != null) ele.textContent = data[key];
   } catch (e) {
-    console.error(e + "while writing \"" + data[key] + " to " + key);
+    console.error(e + 'while writing "' + data[key] + " to " + key);
   }
 }
 
@@ -362,7 +362,7 @@ async function doTimerUpdates() {
   await sleep(1000);
   executeAsync(doTimerUpdates);
 }
-document.getElementById("cur").style.display = "table"
+document.getElementById("cur").style.display = "table";
 getStatus();
 
 executeAsync(doTenSecondRefresh);
