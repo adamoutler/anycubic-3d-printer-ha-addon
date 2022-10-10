@@ -57,10 +57,9 @@
                     </select>
                 </div>
             </div>
-            <div class="col-sm d-flex justify-content-sm-center">
-                <div><br>
-                    <img id="activeImage" style="max-height:180px;"></img>
-                </div>
+            <div class="col justify-content-sm-center">
+                <br>
+                <img id="activeImage" style="max-height:180px;"></img>
             </div>
             <div class="col-sm text-center p-3 w-100">
                 <div class="tab">

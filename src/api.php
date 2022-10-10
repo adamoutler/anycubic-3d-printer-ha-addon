@@ -75,6 +75,9 @@ if ($_SERVER['QUERY_STRING']==NULL ){
 }
 parse_str($_SERVER['QUERY_STRING'], $_GET);
 /* debug*/
+if ($_SERVER["PHP_SELF"]=="/getImage.php"){
+    return;
+}
 if (!isset($_GET["server"])) {
     $_GET["server"] = "192.168.1.254";
 }
@@ -192,6 +195,9 @@ while (sizeof($newarray) >= 1) {
         $output->files = $files;
         $newarray = remove_keys(sizeof($files), $newarray);
 
+        break;
+    case ("getHistory"):
+        
         break;
     case ("getPreview1"):
 

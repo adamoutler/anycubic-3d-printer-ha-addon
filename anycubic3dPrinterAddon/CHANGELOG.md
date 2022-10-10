@@ -2,6 +2,7 @@
 
 | Version | Change                                         |
 | ------- | ---------------------------------------------- |
+| **12**  | Add Current parameters tab.                    |
 | **11**  | Remove Error Popups in UI.                     |
 | **10**  | Improve UI and alignment.                      |
 | **9**   | Add preview image support.                     |

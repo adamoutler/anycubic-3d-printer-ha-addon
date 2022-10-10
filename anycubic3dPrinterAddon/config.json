@@ -1,7 +1,7 @@
 {
   "name": "Anycubic 3D Printer",
   "image": "adamoutler/{arch}-anycubic3dprinter",
-  "version": "11",
+  "version": "12",
   "slug": "anycubic_3d_printer",
   "description": "Controls and Monitoring for MonoX 3D Printers.",
   "arch": ["armhf", "armv7", "aarch64", "i386", "amd64"],
