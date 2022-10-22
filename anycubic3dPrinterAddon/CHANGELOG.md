@@ -2,6 +2,7 @@
 
 | Version | Change                                         |
 | ------- | ---------------------------------------------- |
+| **13**  | Add Current history tab.                       |
 | **12**  | Add Current parameters tab.                    |
 | **11**  | Remove Error Popups in UI.                     |
 | **10**  | Improve UI and alignment.                      |

@@ -65,9 +65,11 @@
                 <div class="tab">
                     <button class="tablinks" onclick="openInfoTab(event, 'cur')">Current Info</button>
                     <button class="tablinks" onclick="openInfoTab(event, 'current_params')">Current Parameters</button>
+                    <button class="tablinks" onclick="openInfoTab(event, 'previous_history')">History</button>
+
                 </div>
                 <div>
-                    <table id="current_params" class="table tabcontent ">
+                    <table id="current_params" class="table tabcontent">
                         <tr>
                             <th>Bottom Layer Count</th>
                             <td id="BottomLayerCount"></td> <td>#</td>
@@ -137,7 +139,7 @@
                             <td id="NormalLayer1RetractSpeedMMperSec"></td><td>mm/s</td>
                         </tr>
                     </table>
-                    <table id="history" class="table tabcontent "></table>
+                    
                     <table id="cur" class="table tabcontent ">
                         <thead class="thead-dark ">
                             <tr>
@@ -163,11 +165,21 @@
 
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
+                    </table>
+                    <table id="previous_history" class="table tabcontent ">
+                        <tr>
+                            <th class="lead" scope="col">afesasdfasd</th>
+                            <th class="lead" scope="col">afesasdfasd</th>
+                            <th class="lead" scope="col">afesasdfasd</th>
+                            <th class="lead" scope="col">afesasdfasd</th>
+                            <th class="lead" scope="col">afesasdfasd</th>
+                            <th class="lead" scope="col">afesasdfasd</th>
+                            <th class="lead" scope="col">afesasdfasd</th>
+                            <th class="lead" scope="col">afesasdfasd</th>
+                            <th class="lead" scope="col">afesasdfasd</th>
 
-                            </tr>
-                        <tbody>
+                        </tr>
+                       
                     </table>
                 </div>
             </div>
@@ -205,10 +217,10 @@
     print "const camera=\"" . $config['MONO_X_CAMERA'] . "\";\n";
     print "const usecamera=\"" . $config['MONO_X_USE_CAMERA'] . "\";\n";
     ?>
-    document.getElementById("camerabox").setAttribute("src", camera);
     if (usecamera.toLowerCase() != "true" &&  usecamera != "1") {
         document.getElementById("window1").hidden = true;
     }
+    document.getElementById("camerabox").setAttribute("src", camera);
 </script>
 
 <script async src="js/ui.js"></script>
