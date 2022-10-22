@@ -205,10 +205,9 @@
     print "const camera=\"" . $config['MONO_X_CAMERA'] . "\";\n";
     print "const usecamera=\"" . $config['MONO_X_USE_CAMERA'] . "\";\n";
     ?>
-    if (usecamera.toLowerCase() != "true" && usecamera != "1") {
+    document.getElementById("camerabox").setAttribute("src", camera);
+    if (usecamera.toLowerCase() != "true" &&  usecamera != "1") {
         document.getElementById("window1").hidden = true;
-
-        document.getElementById("camerabox").setAttribute("src", camera);
     }
 </script>
 
