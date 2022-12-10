@@ -17,7 +17,7 @@ function openInfoTab(evt, divname) {
   // Show the current tab, and add an "active" class to the button that opened the tab
   document.getElementById(divname).style.display = "table";
   evt.currentTarget.className += " active";
-  if (divname=="previous_history"){
+  if (divname == "previous_history") {
     doHistory();
   }
 }

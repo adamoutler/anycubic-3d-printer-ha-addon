@@ -37,40 +37,39 @@ function removeOptions(selectElement) {
   }
 }
 
-
-function doHistory(){
+function doHistory() {
   doApiCall("gethistory,", function (err, data) {
-    if (err !=null){
+    if (err != null) {
       return;
     }
-    var tbl = document.createElement('table');
-    tbl.setAttribute("class","table tabcontent");
-    var set=data["extra"][0];
-    for ( item in set){
-      if (item==0|| item==set.length-1){
+    var tbl = document.createElement("table");
+    tbl.setAttribute("class", "table tabcontent");
+    var set = data["extra"][0];
+    for (item in set) {
+      if (item == 0 || item == set.length - 1) {
         continue;
       }
-      var row=tbl.insertRow();
-      for (dataItem in set[item]){
-        var c=row.insertCell(data[0]);
-        c.innerHTML=set[item][dataItem];
+      var row = tbl.insertRow();
+      for (dataItem in set[item]) {
+        var c = row.insertCell(data[0]);
+        c.innerHTML = set[item][dataItem];
       }
     }
-    var head =tbl.createTHead();
-    var header=head.insertRow(0);
-    header.insertCell().innerHTML="#";
-    header.insertCell().innerHTML="File Name";
-    header.insertCell().innerHTML="name";
-    header.insertCell().innerHTML="size";
-    header.insertCell().innerHTML="minutes";
-    header.insertCell().innerHTML="layers";
-    header.insertCell().innerHTML="ml";
-    header.insertCell().innerHTML="Bot. layer time";
-    header.insertCell().innerHTML="Layer time";
-   
+    var head = tbl.createTHead();
+    var header = head.insertRow(0);
+    header.insertCell().innerHTML = "#";
+    header.insertCell().innerHTML = "File Name";
+    header.insertCell().innerHTML = "name";
+    header.insertCell().innerHTML = "size";
+    header.insertCell().innerHTML = "minutes";
+    header.insertCell().innerHTML = "layers";
+    header.insertCell().innerHTML = "ml";
+    header.insertCell().innerHTML = "Bot. layer time";
+    header.insertCell().innerHTML = "Layer time";
+
     document.getElementById("previous_history").replaceWith(tbl);
-    tbl.setAttribute("id","previous_history")
-    tbl.setAttribute("style","display: table;")
+    tbl.setAttribute("id", "previous_history");
+    tbl.setAttribute("style", "display: table;");
   });
 }
 var callback = function handleResults(err, data) {
