@@ -167,19 +167,6 @@
                         </thead>
                     </table>
                     <table id="previous_history" class="table tabcontent ">
-                        <tr>
-                            <th class="lead" scope="col">afesasdfasd</th>
-                            <th class="lead" scope="col">afesasdfasd</th>
-                            <th class="lead" scope="col">afesasdfasd</th>
-                            <th class="lead" scope="col">afesasdfasd</th>
-                            <th class="lead" scope="col">afesasdfasd</th>
-                            <th class="lead" scope="col">afesasdfasd</th>
-                            <th class="lead" scope="col">afesasdfasd</th>
-                            <th class="lead" scope="col">afesasdfasd</th>
-                            <th class="lead" scope="col">afesasdfasd</th>
-
-                        </tr>
-                       
                     </table>
                 </div>
             </div>
